@@ -6,32 +6,43 @@ module EncoderTester;
 	reg clk;						//Clock to simulate instruction register transisiton
 	reg ip;							//Instruction pointer. Signals which instruction will be passed from memory to the instruction register.
 
-Encoder Encoder (EncoderOut, EncoderIn);
+Encoder encoder (EncoderOut, EncoderIn);
 
 initial
 	begin
 	EncoderIn = 8'd0;
-	clk = 1'd0;
+	//clk = 1'd0;
 	ip = 5'd0;
+	// InstStorage[0] = 32'b00000101010101011110010100101011;			//State 16
+	// InstStorage[1] = 32'b00000101001011010101011010101101;			//State 17
+	// InstStorage[2] = 32'b00000100000101010100001001110101;			//State 19
+	// InstStorage[3] = 32'b11100001110101000101000000000100;			//State 10
 
-	InstStorage[0] = 32'b00000101010101011110010100101011;
-	InstStorage[1] = 32'b00000110100111010101011011010101;
+	#20; EncoderIn = 32'b00000101010101011110010100101011;
+	#20; EncoderIn = 32'b00000101001011010101011010101101;
+	#20; EncoderIn = 32'b00000100000101010100001001110101;
+	#20; EncoderIn = 32'b11100001110101000101000000000100;
 
-	$display("Encoder Output");
-	$monitor("%d", EncoderOut);
-
-
-	#20 $finish;					//End of simulation
 	end
 
-always
+// always
+// 	begin
+// 	#1 clk = !clk;
+// 	end
+
+// always @(clk)
+// 	begin
+// 		#5 EncoderIn = InstStorage[ip];
+// 		ip = ip + 1;
+// 	end
+
+initial
 	begin
-	#1 clk = !clk;
+	$display("Output   IN");
+	$monitor("%d  %b", EncoderOut, EncoderIn);
 	end
 
-always @(clk)
-	begin
-		EncoderIn = InstStorage[ip];
-		ip = ip + 1;
-	end
+initial
+	#2000 $finish;					//End of simulation
 
+endmodule // EncoderTester
