@@ -2,9 +2,15 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 
 	always @ (IR)
 
+
+
+	if(IR[31:0] == 32'b0)
+		OUT = 8'd0;			
+			
+
 	// Data Processing
 
-	if(IR[27:25] == 3'b000)begin				
+	else if(IR[27:25] == 3'b000)begin				
 			if(IR[4] == 0)							
 				begin
 					if(IR[24]==1'b1 && IR[23]==1'b0)
@@ -74,4 +80,4 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 				OUT = 8'd44;		
 	end	
 
-	endmodule // Encoder END
+endmodule // Encoder END
