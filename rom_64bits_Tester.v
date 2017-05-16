@@ -22,7 +22,7 @@ module rom_Tester;
 			IN = 8'd16; #100;
 
 			//teINt all INelection caINeIN
-			repeat(2) #200;
+			repeat(30) #200
 				IN = IN + 1;
 
 
