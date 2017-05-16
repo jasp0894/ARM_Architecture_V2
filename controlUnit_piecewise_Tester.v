@@ -56,8 +56,7 @@ module CU_Tester;
 
 	initial
 		begin
-			// $display("ENC  M1M0    muxA   muxE   muxD            ctlRregister                                                       IncReg         TIME");
-			// $monitor("%d    %d     %d     %d     %d                %b         %d    %d", cu.encoder.OUT, cu.nextState.M1M0, cu.muxA.Y,cu.muxE.Y, cu.muxD.Y,cu.ctl_register.Q, cu.incrementerRegister.Q,$time);
+			
 		
 			$display("S2S0   STS      N2N0    M1M0     ENC    muxA          CR7_0   muxE  IncReg  ADD_Out      muxD         ctlRregister");
 			$monitor("%b     %d       %b      %b       %d     %d        %d      %d    %d      %d       %d              %b", cu.ctl_register.Q[50:48], cu.inv.OUT,cu.ctl_register.Q[56:54], cu.nextState.M1M0, cu.encoder.OUT, cu.muxA.Y,cu.ctl_register.Q[7:0],cu.muxE.Y, cu.incrementerRegister.Q,  cu.adder.S, cu.muxD.Y, cu.ctl_register.Q);
