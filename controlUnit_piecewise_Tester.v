@@ -2,7 +2,7 @@
 module CU_Tester;
 	//input signals
 	reg[31:0] IR;
-	reg MOC, COND, MLS0, MLS1, CLK;
+	reg MOC, COND,LSM_DETECT,LSM_END, CLK;
 	reg[1:0] M1M0;
 
 	//output signals
@@ -11,25 +11,26 @@ module CU_Tester;
 //63 62 61 60 59 58      57-55  54 53 52-50   49-42    41-34  33    32   31   30     29  28  27  26  25  24  23  22  21  20  19  18  17 16  15  14  13  12  11      10  9  8    7     6      5       4       3     2   1  0
 //                       N2-N0 INV MI S2-S0 CR15-CR8 CR7-CR0 FRLd RFLd IRLd MARLd MDRLd R/W MOV MA1 MA0 MB2 MB1 MB0 MC2 MC1 MC0 MD1 MD0 ME OP4 OP3 OP2 OP1 OP0 SLS_EN MS2 MS1 MS0 LSM_EN LSM_IN2 LSM_IN1 LSM_IN0 MH1 MH0 MF
 
-	parameter sim_time = 800;
+	parameter sim_time = 10000;
 
 	//module instantiation
-	controlUnit_p cu (CTL,IR,MOC,COND,MLS0,MLS1,CLK);
+	controlUnit_p cu (CTL,IR,MOC,COND,LSM_DETECT,LSM_END,CLK);
 
 	
 	initial
 		begin
 			//IRPUTS initialization
 
-			MOC=1'd0; COND=1'd0; MLS0=1'd0; MLS1=1'd0; CLK=1'd0; 			
+			MOC=1'd0; COND=1'd0; LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 			
 
 
 
 
 			IR = 32'b11100001110101000101000000000100;		//State 10
 
+
 			IR = 32'b00000101010101011110010100101011;			//State 16
-			#300;
+			// #500;
 
 
 
@@ -51,7 +52,7 @@ module CU_Tester;
 			IR=  32'b11110011000110100001000000101100;			//state 15
 			#20;*/
 
-
+			//there seems to be a synchronization issue 
 
 
 
