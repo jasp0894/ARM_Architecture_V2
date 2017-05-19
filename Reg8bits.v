@@ -12,9 +12,10 @@ else
  	begin
 
 		if(ENABLE)
-			Q = D;
+			Q <= D;
 		else
-			Q = Q;
+			Q <= Q;
+
 	end
 
 endmodule // D_Latch8bits

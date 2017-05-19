@@ -2,7 +2,7 @@
 module mux_8x1 (output reg Y, input [2:0]S, input A,B,C,D,E,F,G,H);
 	
 	//Test for selection bit
-	always @ (S)
+	always @ (S,A,B,C,D,E,F,G,H)
 
 	case(S)
 		3'b000:	Y=A;
