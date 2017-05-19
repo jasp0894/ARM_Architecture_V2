@@ -2,7 +2,7 @@
 module mux_4x1 (output reg[7:0] Y, input [1:0]S, input[7:0] A,B,C,D);
 	
 	//Test for selection bit
-	always @ (S)
+	always @ (S,A,B,C,D)
 
 	case(S)
 		2'b00:	Y=A;
