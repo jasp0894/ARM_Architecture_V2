@@ -15,6 +15,7 @@ else
 			Q <= D;
 		else
 			Q <= Q;
+
 	end
 
 endmodule // D_Latch8bits
