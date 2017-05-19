@@ -15,4 +15,4 @@ module mux_2x1 (output reg[7:0] Y, input S, input[7:0] A,B);
 		1'b1:	Y=B;
 	endcase // S
 
-endmodule // mux_4x1
+endmodule // mux_2x1
