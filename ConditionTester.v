@@ -5,6 +5,7 @@ module CondTester (output reg OUT, input [3:0] COND, input Z,C,N,V);
 
 
 	case(COND)
+		
 		4'b0000: 
 		begin
 			if(!Z) 
