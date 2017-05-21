@@ -10,32 +10,32 @@ module ALU_V1 (output reg [31:0] R, output reg CF, ZF, VF, NF, input [31:0]A,B, 
 
 //-----------------ARM Instruction set definition---------------------
 
-	parameter  AND = 4'b00000;
-	parameter  EOR = 4'b00001;
-	parameter  SUB = 4'b00010;
-	parameter  RSB = 4'b00011;
-	parameter  ADD = 4'b00100;
-	parameter  ADC = 4'b00101;
-	parameter  SBC = 4'b00110;
-	parameter  RSC = 4'b00111;
-	parameter  TST = 4'b01000;
-	parameter  CMP = 4'b01010;
-	parameter  CMN = 4'b01011;
-	parameter  ORR = 4'b01100;
-	parameter  TEQ = 4'b01001;
-	parameter  MOV = 4'b01101;
-	parameter  BIC = 4'b01110;
-	parameter  MVN = 4'b01111;
+	parameter  AND = 5'b00000;
+	parameter  EOR = 5'b00001;
+	parameter  SUB = 5'b00010;
+	parameter  RSB = 5'b00011;
+	parameter  ADD = 5'b00100;
+	parameter  ADC = 5'b00101;
+	parameter  SBC = 5'b00110;
+	parameter  RSC = 5'b00111;
+	parameter  TST = 5'b01000;
+	parameter  CMP = 5'b01010;
+	parameter  CMN = 5'b01011;
+	parameter  ORR = 5'b01100;
+	parameter  TEQ = 5'b01001;
+	parameter  MOV = 5'b01101;
+	parameter  BIC = 5'b01110;
+	parameter  MVN = 5'b01111;
 
-	parameter  OP1 = 4'b10000;
-	parameter  OP2 = 4'b10001;
-	parameter  OP3 = 4'b10010;
-	parameter  OP4 = 4'b10011;
-	parameter  OP5 = 4'b10100;
-	parameter  OP6 = 4'b10101;
-	parameter  OP7 = 4'b10110;
-	parameter  OP8 = 4'b11001;
-	parameter  OP9 = 4'b11010;
+	parameter  OP1 = 5'b10000;
+	parameter  OP2 = 5'b10001;
+	parameter  OP3 = 5'b10010;
+	parameter  OP4 = 5'b10011;
+	parameter  OP5 = 5'b10100;
+	parameter  OP6 = 5'b10101;
+	parameter  OP7 = 5'b10110;
+	parameter  OP8 = 5'b11001;
+	parameter  OP9 = 5'b11010;
 
 
 
@@ -296,10 +296,16 @@ reg [31:0] tempResult;
 			end
 
 	//--------------------------OP Instructions------------------------------
-
-	
-
-
+	//---These instructions do not alter flags------------------------------
+	OP1:  R = B;			//moves B to the output
+	OP2:  R = B+4;			// B+4to the output
+	OP3:  R = A+B+4;			//A+B+4to the output
+	OP4:  R = B-4;
+	OP5:  R = A-4;
+	OP6:  R = A+B;
+	OP7:  R = B-A;
+	OP8:  R = A;
+	OP9:  R = A+4;
 
 
 	endcase // OP
