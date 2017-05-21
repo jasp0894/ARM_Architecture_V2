@@ -8,7 +8,7 @@ module ALU_Test_V1;
 //local variables
 //--------------input
 reg [31:0] A,B; 		//32 bit input operands
-reg [3:0] OP; 			//Input operation 
+reg [4:0] OP; 			//Input operation 
 reg	CIN; 				//input carry
 //--------------output
 wire[31:0] R; 			//32-bit ALU result
@@ -17,23 +17,32 @@ wire  C,V,N,Z;			//condition codes
 
 //-----------------ARM Instruction set definition---------------------
 
-	parameter  AND = 4'b0000;
-	parameter  EOR = 4'b0001;
-	parameter  SUB = 4'b0010;
-	parameter  RSB = 4'b0011;
-	parameter  ADD = 4'b0100;
-	parameter  ADC = 4'b0101;
-	parameter  SBC = 4'b0110;
-	parameter  RSC = 4'b0111;
-	parameter  TST = 4'b1000;
-	parameter  CMP = 4'b1010;
-	parameter  CMN = 4'b1011;
-	parameter  ORR = 4'b1100;
-	parameter  TEQ = 4'b1001;
-	parameter  MOV = 4'b1101;
-	parameter  BIC = 4'b1110;
-	parameter  MVN = 4'b1111;
+	parameter  AND = 5'b00000;
+	parameter  EOR = 5'b00001;
+	parameter  SUB = 5'b00010;
+	parameter  RSB = 5'b00011;
+	parameter  ADD = 5'b00100;
+	parameter  ADC = 5'b00101;
+	parameter  SBC = 5'b00110;
+	parameter  RSC = 5'b00111;
+	parameter  TST = 5'b01000;
+	parameter  CMP = 5'b01010;
+	parameter  CMN = 5'b01011;
+	parameter  ORR = 5'b01100;
+	parameter  TEQ = 5'b01001;
+	parameter  MOV = 5'b01101;
+	parameter  BIC = 5'b01110;
+	parameter  MVN = 5'b01111;
 
+	parameter  OP1 = 5'b10000;
+	parameter  OP2 = 5'b10001;
+	parameter  OP3 = 5'b10010;
+	parameter  OP4 = 5'b10011;
+	parameter  OP5 = 5'b10100;
+	parameter  OP6 = 5'b10101;
+	parameter  OP7 = 5'b10110;
+	parameter  OP8 = 5'b11001;
+	parameter  OP9 = 5'b11010;
 
 
 
@@ -48,7 +57,7 @@ initial	begin
 	CIN = 0;		//Input Carry equals 0
 	A = 0; B = 0;
 	//--------------------------------AND	
-	OP = AND;			
+/*	OP = AND;			
 	#10; A = 32'h12344567; B = 32'h0000FE18;
 	#10; A = 32'h005AC023; B = 32'h0DAE2310;
 	#10;
@@ -168,11 +177,72 @@ initial	begin
 		OP = RSC; 
 		#10; A = 32'h12344567; B = 32'hF000FE18;
 		#10; A = 32'h005AC023; B = 32'h0DAE2310;
-		#10;		
+		#10;	
+
+*/
 
 
 
+		$display("**********************************************************************");
+		//--------------------------------Rd = B
+		OP = OP1; 
+		#10; A = 32'h12344567; B = 32'hF000FE18;
+		#10;
 
+		$display("**********************************************************************");
+		//--------------------------------Rd = B +4
+		OP = OP2; 
+		#10; A = 32'h50000000; B = 32'hB0000000;
+		#10; A = 32'h005AC023; B = 32'h0DAE2310;
+		#10;
+
+		$display("**********************************************************************");
+		//--------------------------------Rd = R=B + A +4
+		OP = OP3; 
+		#10; A = 32'h12344567; B = 32'hF000FE18;
+		#10; A = 32'h50000000; B = 32'hB0000000;
+		#10;
+
+		$display("**********************************************************************");
+		//--------------------------------Rd=B-4
+		OP = OP4; 
+		#10; A = 32'h12344567; B = 32'd10;
+		#10; A = 32'h005AC023; B = 32'h0DAE2310;
+		#10;	
+
+		$display("**********************************************************************");
+		//--------------------------------Rd =A-4
+		OP = OP5; 
+		#10; A = 32'd10; B = 32'hF000FE18;
+		#10;
+
+		$display("**********************************************************************");
+		//--------------------------------Rd = A +B
+		OP = OP6; 
+		#10; A = 32'h50000000; B = 32'hB0000000;
+		#10; A = 32'h005AC023; B = 32'h0DAE2310;
+		#10;
+
+		$display("**********************************************************************");
+		//--------------------------------Rd= B-A
+		OP = OP7; 
+		#10; A = 32'd1; B = 32'd5;
+		#10; A = 32'h50000000; B = 32'hB0000000;
+		#10;
+
+		$display("**********************************************************************");
+		//--------------------------------Rd= A
+		OP = OP8; 
+		#10; A = 32'h12344567; B = 32'hF000FE18;
+		#10; A = 32'h005AC023; B = 32'h0DAE2310;
+		#10;	
+
+		$display("**********************************************************************");
+		//--------------------------------Rd= A +4
+		OP = OP9; 
+		#10; A = 32'h12344567; B = 32'hF000FE18;
+		#10; A = 32'h005AC023; B = 32'h0DAE2310;
+		#10;	
 
 
 end
