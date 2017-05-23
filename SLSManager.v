@@ -1,4 +1,4 @@
-module Encoder (output reg[2:0] OUT, input[31:0] IR, input S);
+module SLSManager (output reg[2:0] OUT, input[31:0] IR, input SLS_EN);
 
 	always @ (IR, SLS_EN)
 
@@ -38,5 +38,7 @@ module Encoder (output reg[2:0] OUT, input[31:0] IR, input S);
 
 
 		end
+	/*else 
+		OUT = 3'd0;*/
 
 endmodule // Encoder END
