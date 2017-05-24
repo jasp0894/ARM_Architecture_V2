@@ -65,7 +65,6 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 				OUT= 8'd46;					
 			else if (IR[21] == 0)	// immediate offset
 				OUT = 8'd47;
-
 			else	//pre-indexed
 				OUT = 8'd48;		
 		end	
