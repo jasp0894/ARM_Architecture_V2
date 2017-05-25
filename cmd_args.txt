@@ -1,0 +1,1 @@
+iverilog -o  dp1 DataPath_Phase1.v controlUnit_piecewise.v ALU.v FlagRegister.v ConditionTester.v mux_4x1_4bit.v mux_8x1_4bit.v registerFile.v mux_8x1_32bit.v shifter.v AdderCU.v ControlRegister.v D_Latch32bits.v Encoder.v InverterCU.v NextStateAdd.v Reg32bits.v Reg8bits.v binaryDecoder.v mux_16x1.v mux_2x1_8bit.v mux_4x1_8bit.v mux_8x1_1bit.v rom_64bits.v
