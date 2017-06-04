@@ -1,5 +1,11 @@
 module lsm_manager (LSM_EN, LSM_IN30, IR, CLK, LSM_ADRR30, LSM_DETECT, LSM_END);
 
+//Observations
+//The counter should be placed as an output.
+
+
+
+
 //Variable definitions
 	//Inputs
 	input wire LSM_EN;
@@ -24,10 +30,23 @@ module lsm_manager (LSM_EN, LSM_IN30, IR, CLK, LSM_ADRR30, LSM_DETECT, LSM_END);
 				begin
 					LSMAHR = IR[15:0];
 					if(IR[23]) 					//Transfer is made downward. U = IR[23] = 1
-						LSM_COUNTER = 4'd0;
-					else						//Transfer is made upward. U = IR[23] = 0
 						LSM_COUNTER = 4'd16;
+					else						//Transfer is made upward. U = IR[23] = 0
+						LSM_COUNTER = 4'd0;
 				end
 			else if(LSM_IN30[2] && LSM_IN30[1]) //Perform shift and count
+				begin
+					if(IR[23])											//Transfer is made downwards.		
+						begin
+							LSMAHR << 1;								//Shift LEFT to check next bit
+							//Check if counter finished?
+							LSM_COUNTER <= LSM_COUNTER - 1'b1;			//Decrease counter by one.
+						end
+					else												//Transfer is made upwards
+						begin											//
+							LSMAHR >> 1;
+							//Check if counter finished?
+							LSM_COUNTER <= LSM_COUNTER + 1;
+						end
 				
 endmodule
