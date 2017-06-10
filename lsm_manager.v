@@ -10,6 +10,7 @@ module lsm_manager (LSM_EN, LSM_IN_3_0, IR, CLK, LSM_ADRR_3_0, LSM_DETECT, LSM_E
 	input wire LSM_EN;					//Input signal that enables the LSM manager to perform operations.
 	input wire [2:0] LSM_IN_3_0;		//Control signals of the LSM combined in a bus. The signals are LSM_Count, LSM_Shift, and the least significant bit is both the LSMAHR and the counter load enable.
 	input wire [31:0] IR;				//Labeled in the instruction format as U. Determines if the transfer is made upwards or downwards.
+	//Completely FALSE statement --> //Check the above line since the only bit that is used from the instruction register is bit 23.
 	input wire CLK;						//Clock signal
 
 	//Outputs
