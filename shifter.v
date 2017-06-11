@@ -37,27 +37,31 @@ module shifter (output reg[31:0] SHIFTER_OPERAND, output reg COUT, input [31:0] 
 
 					LSL: 
 						begin
-							SHIFTER_OPERAND = RM << IR[11:7];
-							COUT = RM[8'b00100000 - IR[11:7]];
+							RegTemp = {28'd0,IR[3:0]}; 
+							SHIFTER_OPERAND = RegTemp << IR[11:7];
+							COUT = RegTemp[8'b00100000 - IR[11:7]];
 						end
 
 					LSR: 
 						begin
-							SHIFTER_OPERAND = RM >> IR[11:7];
-							COUT = RM[IR[11:7] - 1];
+							RegTemp = {28'd0,IR[3:0]};
+							SHIFTER_OPERAND = RegTemp >> IR[11:7];
+							COUT = RegTemp[IR[11:7] - 1];
 						end	
 
 					ASR: 
 						begin
-							SHIFTER_OPERAND = RM >>> IR[11:7];
+							RegTemp = {28'd0,IR[3:0]};
+							SHIFTER_OPERAND = RegTemp >>> IR[11:7];
 							COUT = RM[IR[11:7] - 1];
 						end
 
 
 					ROR: 
 						begin
-							SHIFTER_OPERAND = RM >> IR[11:7];
-							COUT = RM[IR[11:7] - 1];
+							RegTemp = {28'd0,IR[3:0]};
+							SHIFTER_OPERAND = RegTemp >> IR[11:7];
+							COUT = RegTemp[IR[11:7] - 1];
 						end				
 
 				endcase // shift
