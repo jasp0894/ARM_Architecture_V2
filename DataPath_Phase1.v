@@ -23,14 +23,14 @@ module dp_phase1;
 
 	//modules instantiation
 	controlUnit_p cu1(CU_OUT,IR,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
-	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[3], {1'b0,IR[24:21]});
+	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[2], {1'b0,IR[24:21]});
 	flagRegister FR(FR_Q,Z,C,N,V,CU_OUT[33],CLK);
 	CondTester conditionTester (CONDTESTER_OUT,IR[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
 	mux_4x1_4b muxA (MA_OUT,CU_OUT[26:25],IR[19:16], 4'b1111, 4'd0, IR[15:12]);
 	mux_8x1_4b muxC (MC_OUT,CU_OUT[21:19],IR[19:16], 4'b1111, 4'b1110, IR[15:12], 4'd0, 4'd0, 4'd0, 4'd0);
 	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT[32],MA_OUT,IR[3:0], MC_OUT);
 	mux_8x1_32b muxB (MB_OUT,CU_OUT[24:22],PB, SHIFTER_OUT, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0);
-	shifter SHIFTER (SHIFTER_OUT,C,PB,IR,C,1'd1);
+	shifter SHIFTER (SHIFTER_OUT,C,PB,IR,1'b0,1'd1);
 
 
 	initial
@@ -39,8 +39,8 @@ module dp_phase1;
 
 			MOC=1'd0; COND=1'd0;LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 		
 
-			
-	
+		//	IR = 32'b11100001101110101000000000101100;		//MOV
+		//	#200;
 			IR = 32'b11100000100110100001000000101100;		//State 10
 			#20;
 			/*
