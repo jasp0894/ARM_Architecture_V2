@@ -64,8 +64,8 @@ module dp_phase1;
 	initial
 		begin
 		
-			$display("Rn  CondT Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU   FR   ZCNV 	    	    Time"); 
-			$monitor("%d    %d	%d   %d  %d %d %d %d  %d    %d   %b     %b  %d ",IR[19:16],CONDTESTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,FR_Q,FLAGS, $time); 
+			$display("Rn  CondT Rd  MA  MC  	     PA      PB       SHIFT         MB_S  	   ALU   FR   ZCNV 	    	    Time"); 
+			$monitor("%d    %d	%d   %d  %d %d %d %d  %d    %d   %b     %b  %d ",IR[19:16],CONDTESTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS, $time); 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 		//
 
