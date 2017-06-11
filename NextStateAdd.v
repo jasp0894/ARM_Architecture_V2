@@ -11,8 +11,8 @@ module NextStateAdd (output reg[1:0] M1M0, input [2:0]IN, input STS);
 		3'b011: M1M0 = 2'b11;	//Incrementer regardless STS value
 
 		3'b100: begin
-			if(!STS) M1M0 = 2'b00;	//Control Register
-			else M1M0 = 2'b10;	//Encoder
+			if(!STS) M1M0 = 2'b00;	//Encoder
+			else M1M0 = 2'b10;	//Control Register
 		end
 
 

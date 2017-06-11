@@ -1,10 +1,8 @@
-module EncoderTester;
+module condtester_test;
 
-	reg [31:0] InstStorage [19:0];	//Simulates the memory that is passing down instructions to the instruction register.		
-	reg [31:0] EncoderIn;			//Simulates the output of the instruction register.
-	wire [7:0] EncoderOut;			//Output of the encoder.
+	reg [3:0] cond, flags;			//Simulates the condition and flags
+	wire Out;			        //Output of the condition tester module 
 	reg clk;						//Clock to simulate instruction register transisiton
-	reg ip;							//Instruction pointer. Signals which instruction will be passed from memory to the instruction register.
 
 Encoder encoder (EncoderOut, EncoderIn);
 
@@ -22,8 +20,6 @@ initial
 	#20; EncoderIn = 32'b00000101001011010101011010101101;
 	#20; EncoderIn = 32'b00000100000101010100001001110101;
 	#20; EncoderIn = 32'b11100001110101000101000000000100;
-	#20; EncoderIn = 32'b00000001110000000000000011010000;//47
-	#20; EncoderIn = 32'b11110001100111111111000111111111; //Signed  halfowrd (50)
 
 	end
 
