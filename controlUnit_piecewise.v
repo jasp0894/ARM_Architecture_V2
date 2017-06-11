@@ -1,6 +1,6 @@
 
 //---------------------ROM 2^8 cells of 64 bits----------------------
-module controlUnit_p(output [31:0] CU, input [31:0] IR, input MOC, COND, LSM_DETECT,LSM_END, CLK);
+module controlUnit_p(output reg [33:0] CU, input [31:0] IR, input MOC, COND, LSM_DETECT,LSM_END, CLK);
 	
 	
 	//63 62 61 60 59 58  57-55  54 53 52-50   49-42    41-34  33    32   31   30     29  28  27  26  25  24  23  22  21  20  19  18  17 16  15  14  13  12  11      10  9  8    7     6      5       4       3     2   1  0
@@ -15,9 +15,9 @@ module controlUnit_p(output [31:0] CU, input [31:0] IR, input MOC, COND, LSM_DET
 
 	wire[63:0] CTL_REG_OUT,ROM_OUT;
 
-	wire CU;
 
-	always @ (CLK);
+	
+		
 
 			
 
@@ -46,6 +46,14 @@ module controlUnit_p(output [31:0] CU, input [31:0] IR, input MOC, COND, LSM_DET
 		    InverterCU inv(INV_OUT, MC_OUT,CTL_REG_OUT[54]);
 
 			NextStateAdd nextState(M1M0, CTL_REG_OUT[57:55], INV_OUT);
+
+		always @ (CLK)
+
+			CU <= CTL_REG_OUT[33:0];
+
+
+
+	
 
 			
 

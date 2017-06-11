@@ -1,4 +1,4 @@
-module FlagRegister(output reg[3:0] Q, input Z,C,N,V,ENABLE,CLK);
+module flagRegister(output reg[3:0] Q, input Z,C,N,V,ENABLE,CLK);
 
 	reg reset=1'b1;
 
@@ -15,14 +15,15 @@ module FlagRegister(output reg[3:0] Q, input Z,C,N,V,ENABLE,CLK);
 	begin
 
 		if(ENABLE)
+		begin
 		Q[3]<=Z;		//output initialization
 		Q[2]<=C;		//output initialization
 		Q[1]<=N;		//output initialization
 		Q[0]<=V;		//output initialization
-		
-		else
-		Q <= Q;
-
 	end
+	else
+	Q <= Q;
+
+end
 
 endmodule // D_Latch4bits

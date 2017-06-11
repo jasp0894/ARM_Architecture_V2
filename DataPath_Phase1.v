@@ -4,13 +4,13 @@ module dp_phase1;
 
 //input signals
 	reg[31:0] IR;
-	reg MOC,LSM_DETECT, LSM_END, CLK;
+	reg MOC,COND,LSM_DETECT, LSM_END, CLK;
 
 
 //output signals
-	wire[31:0] CU_OUT, PA, PB, ALU_OUT, IR_Q, SHIFTER_OUT, MB_OUT;
-
-	wire[3:0] FR_Q, MC_OUT, MA_OUT,;
+	wire[31:0]  PA, PB, ALU_OUT, IR_Q, SHIFTER_OUT, MB_OUT;
+	wire [33:0] CU_OUT;
+	wire[3:0] FR_Q, MC_OUT, MA_OUT;
 
 	wire[4:0] MD_OUT;
 
@@ -22,95 +22,42 @@ module dp_phase1;
 	parameter sim_time = 1000;
 
 	//modules instantiation
-	controlUnit_p cu (CU_OUT,IR,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
-	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[3],MD_OUT);
-	FLagRegister FR(FR_Q,Z,C,N,V,CU_OUT[33],CLK);
+	controlUnit_p cu1(CU_OUT,IR,MOC,COND,LSM_DETECT,LSM_END,CLK);
+	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[3], {1'b0,IR[24:21]});
+	flagRegister FR(FR_Q,Z,C,N,V,CU_OUT[33],CLK);
 	CondTester conditionTester (CONDTESTER_OUT,IR[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
-	mux_4x1_4b (MA_OUT,CU_OUT[26],CU_OUT[25],IR[19:16], 4'b1111, 4'd0, IR[15:12]);
-	mux_8x1_4b (MC_OUT,CU_OUT[21],CU_OUT[20],CU_OUT[19],IR[19:16], 4'b1111, 4'b1110, IR[15:12], 4'd0, 4'd0, 4'd0, 4'd0);
+	mux_4x1_4b muxA (MA_OUT,CU_OUT[26:25],IR[19:16], 4'b1111, 4'd0, IR[15:12]);
+	mux_8x1_4b muxC (MC_OUT,CU_OUT[21:19],IR[19:16], 4'b1111, 4'b1110, IR[15:12], 4'd0, 4'd0, 4'd0, 4'd0);
 	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT[32],MA_OUT,IR[3:0], MC_OUT);
-	mux_8x1_4b (MB_OUT,CU_OUT[24],CU_OUT[23],CU_OUT[12],PB, SHIFTER_OUT, 4'd0, 4'd0, 4'd0, 4'd0, 4'd0, 4'd0);
-	
+	mux_8x1_32b muxB (MB_OUT,CU_OUT[24:22],PB, SHIFTER_OUT, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0);
+	shifter SHIFTER (SHIFTER_OUT,C,PB,IR,C,1'd1);
+
+
 	initial
 		begin
-			//IRPUTS initialization
+			//INPUTS initialization
 
-			MOC=1'd1; COND=1'd0; LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 			
-
-			
-
-			IR = 32'b11110001100111111111000111111111; //Signed  halfowrd (50)
-
-
-
-			//IR = 32'b00001011000000000000000000000000; //44
-
-
-			//IR = 32'b00001000000000000000000000000000; //30
-
-
-
-			//IR = 32'b00000110010100000000000000000000; //22
-
-
-			//IR = 32'b00000100010100000000000000000000; //17
-
-			//IR = 32'b00000111101100000000000000000000; //23
-
-			//IR = 32'b00000101111000000000000000000000; //19
-
-
-
-			//IR= 32'b00000111110100000000000000000000;   //21
-
-
-
-
-			//IR = 32'b00000100000101010100001001110101;			//State 19
+			MOC=1'd0; COND=1'd0;LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 		
 
 			
-
-			//IR =32'b00000101001011010101011010101101; //State17
-
-
-			//  IR = 32'b00000101110100000000000000000000;    //state16 e0
-
-			//IR = 32'b00000101010101011110010100101011;			//State 16
-			// #40
-
-			// IR = 32'b11100001110101000101000000000100;		//State 10
-			
-			// #500;
-
-
-			/*M1M0 = 2'd2;#100;
-			M1M0 = 2'd3;#100;*/
-			// M1M0 = 2'd3;
-
+	
+			IR = 32'b11100000100110100001000000101100;		//State 10
+			#20;
 			/*
 			IR =  32'b11110010100110100001000000101100; 		//state 11
 			#200;
-
 			IR= 32'b11110001001110100001000000101100;		//state 14
 			#200;
-
 			IR=  32'b11110011000110100001000000101100;			//state 15
 			#20;*/
-
-			//there seems to be a synchronization issue 
-
-
-
-
 		end
 
 	initial
 		begin
-			
 		
-			$display("S2S0  INV   STS      N2N0    M1M0     ENC    mu0A    CR15_8          CR7_0   mu0E  IncReg  ADD_Out        ctlRregister ");
-			$monitor("%b   %d    %d       %b      %b       %d     %d        %d        %d      %d    %d      %d       %b", cu.ctl_register.Q[52:50],cu.ctl_register.Q[54], cu.inv.OUT,cu.ctl_register.Q[57:55], cu.nextState.M1M0, cu.encoder.OUT, cu.muxA.Y,cu.ctl_register.Q[49:42],cu.ctl_register.Q[41:34],cu.muxE.Y, cu.incrementerRegister.Q,  cu.adder.S,  cu.ctl_register.Q);
-		
+			$display("Rn   SOperand   Rd		    MA  MC  	  PA 	    PB       SHIFT         MB  		ALU   Z   C   N   V 	    	 Time"); 
+			$monitor("%d  %d %d  %d   %d %d %d %d  %d     %d   %d  %d  %d  %d  %d ",IR[19:16],SHIFTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V, $time); 
+			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 		//
 
 		end
