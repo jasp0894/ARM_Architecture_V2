@@ -1,13 +1,13 @@
 
 //---------------------Mux 8x1 1bit----------------------
-module mux_8x1 (Y, S, A, B, C, D, E, F, G, H);
+module mux_8x1_4bit (Y, S, A, B, C, D, E, F, G, H);
 	
 	//Inputs
 	input wire [3:0] A,B,C,D,E,F,G,H;
 	input wire [2:0] S;
 
 	//Outputs
-	output wire [3:0] Y;
+	output reg [3:0] Y;
 
 	//Test for selection bit
 	always @ (S,A,B,C,D,E,F,G,H)
