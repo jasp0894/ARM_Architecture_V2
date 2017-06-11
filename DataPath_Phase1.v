@@ -55,8 +55,8 @@ module dp_phase1;
 	initial
 		begin
 		
-			$display("Rn   SOperand   Rd		    MA  MC  	  PA 	    PB       SHIFT         MB  		ALU   Z   C   N   V 	    	 Time"); 
-			$monitor("%d  %d %d  %d   %d %d %d %d  %d     %d   %d  %d  %d  %d  %d ",IR[19:16],SHIFTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V, $time); 
+			$display("Rn   SOperand   Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU  Z  C  N  V 	    	    Time"); 
+			$monitor("%d %d 	%d   %d  %d %d %d %d  %d    %d   %d  %d  %d  %d  %d ",IR[19:16],SHIFTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V, $time); 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 		//
 
