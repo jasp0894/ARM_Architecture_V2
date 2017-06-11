@@ -6,7 +6,7 @@
 	Input B will take the place of Rn
 	Output R will take the place of Rd
 **/
-module ALU_V1 (output reg [31:0] R, output reg CF, ZF, VF, NF, input [31:0]A,B, input CIN, input [4:0] OP);
+module ALU_V1 (output reg [31:0] R, output reg [3:0] FLAG, /*output reg CF, ZF, VF, NF*/ input [31:0]A,B, input CIN, input [4:0] OP);
 
 //-----------------ARM Instruction set definition---------------------
 
@@ -41,10 +41,10 @@ module ALU_V1 (output reg [31:0] R, output reg CF, ZF, VF, NF, input [31:0]A,B, 
 
 	//Flags initialization
 	initial begin
-		CF = 0;			//Carry Flag
-		ZF = 0;			//Zero Flag
-		VF = 0;			//Overflow Flag
-		NF = 0;			//Negative Flag
+		FLAG[3] = 1'b0;			//Carry Flag
+		FLAG[2] = 1'b0;			//Zero Flag
+		FLAG[1] = 1'b0;			//Overflow Flag
+		FLAG[0] = 1'b0;			//Negative Flag
 	end
 
 //Temporal Variables
@@ -57,153 +57,153 @@ reg [31:0] tempResult;
 			begin
 				R = A & B;		//Bitwise and operation
 				if(R == 32'd0)		//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit
 			end
 		EOR:
 			begin
 				R = A ^ B;		//Bitwise xor operation
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit
 			end
 		ORR:
 			begin
 				R = A | B;		//Bitwise OR operation
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit
 			end
 		BIC:
 			begin
 				R = ~A & B;		//A AND NOT_B
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit
 			end
 	//--------------------------Arithmetic Instructions------------------------------
 		SUB:
 			begin
-				{CF,R} = B - A;		//BorrowFlag = not(CarryFlag)
-				CF = ~CF;
+				{FLAG[3],R} = B - A;		//BorrowFlag = not(CarryFlag)
+				FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == A[31])
-					VF = 1'b1;		//Overflow only occurs when subtracting two numbers of 
+					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
 									//subtrahend number 
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		SBC:
 			begin
-				 {CF,R} = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 CF = ~CF;
+				 {FLAG[3],R} = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == A[31])
-					VF = 1'b1;		//Overflow only occurs when subtracting two numbers of 
+					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
 									//subtrahend number 
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		RSB:
 			begin
 			
-				 {CF,R} = A - B;		//BorrowFlag = not(CarryFlag)
-				 CF = ~CF;
+				 {FLAG[3],R} = A - B;		//BorrowFlag = not(CarryFlag)
+				 FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == B[31])
-					VF = 1'b1;		//Overflow only occurs when subtracting two numbers of 
+					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
 									//subtrahend number 
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		RSC:
 			begin
-				 {CF,R} = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 CF = ~CF;
+				 {FLAG[3],R} = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == B[31])
-					VF = 1'b1;		//Overflow only occurs when subtracting two numbers of 
+					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
 									//subtrahend number 
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		ADD:
 			begin
 			
-				 {CF,R} = A + B;		
+				 {FLAG[3],R} = A + B;		
 				if(A[31] == B[31] && R[31] !== A[31])
-					VF = 1'b1;		//Overflow only occurs when adding two equally signed numbers
+					FLAG[1] = 1'b1;		//Overflow only occurs when adding two equally signed numbers
 									//and the result is of the opposite sign
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end	
 		
 		ADC:
 			begin
-				 {CF,R} = A + B + CIN;		//The addition operation includes the input carry
+				 {FLAG[3],R} = A + B + CIN;		//The addition operation includes the input carry
 				if(A[31] == B[31] && R[31] !== A[31])
-					VF = 1'b1;		//Overflow only occurs when adding two equally signed numbers
+					FLAG[1] = 1'b1;		//Overflow only occurs when adding two equally signed numbers
 									//and the result is of the opposite sign
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 	//--------------------------Data transfer Instructions------------------------------
@@ -212,11 +212,11 @@ reg [31:0] tempResult;
 				R = A;			//moves input A to the output
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		MVN:
@@ -224,11 +224,11 @@ reg [31:0] tempResult;
 				R = ~A;			//moves NOT_A to the output
 
 				if(R == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = R[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = R[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 	//--------------------------Comparison Instructions------------------------------
@@ -236,62 +236,62 @@ reg [31:0] tempResult;
 			begin
 				tempResult = A & B;		//Dummy variable to test flags
 				if(tempResult == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = tempResult[31];		//NF takes the value of R's MSbit
+				FLAG[0] = tempResult[31];		//FLAG[0] takes the value of R's MSbit
 			end
 
 		TEQ:
 			begin
 				tempResult = A ^ B;		//Dummy variable to test flags
 				if(tempResult == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = tempResult[31];		//NF takes the value of R's MSbit
+				FLAG[0] = tempResult[31];		//FLAG[0] takes the value of R's MSbit
 			end
 
 		CMP:
 			begin
 				tempResult = 32'd0;		//Dummy variable to test flags
-				{CF,tempResult} = B - A;		//BorrowFlag = not(CarryFlag)
-				CF = ~CF;
+				{FLAG[3],tempResult} = B - A;		//BorrowFlag = not(CarryFlag)
+				FLAG[3] = ~FLAG[3];
 
 				if(A[31] != B[31] && tempResult[31] == A[31])
-					VF = 1'b1;		//Overflow only occurs when subtracting two numbers of 
+					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
 									//subtrahend number 
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(tempResult == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = tempResult[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = tempResult[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
 		CMP:
 			begin
 				tempResult = 32'd0;		//Dummy variable to test flags
-				 {CF,tempResult} = B + A;		//BorrowFlag = not(CarryFlag)
+				 {FLAG[3],tempResult} = B + A;		//BorrowFlag = not(CarryFlag)
 
 				if(A[31] == B[31] && tempResult[31] !== A[31])
-					VF = 1'b1;		//Overflow only occurs when adding two equally signed numbers
+					FLAG[1] = 1'b1;		//Overflow only occurs when adding two equally signed numbers
 									//and the result is of the opposite sign
 				else
-					VF = 1'b0;
+					FLAG[1] = 1'b0;
 
 				if(tempResult == 32'd0)	//Negative Flag condition testing
-					ZF = 1'b1;
+					FLAG[2] = 1'b1;
 				else 
-					ZF = 1'b0;		//Result is not zero
+					FLAG[2] = 1'b0;		//Result is not zero
 
-				NF = tempResult[31];		//NF takes the value of R's MSbit	
+				FLAG[0] = tempResult[31];		//FLAG[0] takes the value of R's MSbit	
 				
 			end
 

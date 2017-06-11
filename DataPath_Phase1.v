@@ -10,7 +10,7 @@ module dp_phase1;
 //output signals
 	wire[31:0]  PA, PB, ALU_OUT, IR_Q, SHIFTER_OUT, MB_OUT;
 	wire [33:0] CU_OUT;
-	wire[3:0] FR_Q, MC_OUT, MA_OUT;
+	wire[3:0] FR_Q, MC_OUT, MA_OUT , FLAGS;
 
 	wire[4:0] MD_OUT;
 
@@ -22,15 +22,16 @@ module dp_phase1;
 	parameter sim_time = 1000;
 
 	//modules instantiation
+	flagRegister FR(FR_Q,FLAGS,CU_OUT[33],CLK);
 	controlUnit_p cu1(CU_OUT,IR,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
-	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[2], {1'b0,IR[24:21]});
-	flagRegister FR(FR_Q,Z,C,N,V,CU_OUT[33],CLK);
+	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], {1'b0,IR[24:21]});
+	
 	CondTester conditionTester (CONDTESTER_OUT,IR[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
 	mux_4x1_4b muxA (MA_OUT,CU_OUT[26:25],IR[19:16], 4'b1111, 4'd0, IR[15:12]);
 	mux_8x1_4b muxC (MC_OUT,CU_OUT[21:19],IR[19:16], 4'b1111, 4'b1110, IR[15:12], 4'd0, 4'd0, 4'd0, 4'd0);
 	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT[32],MA_OUT,IR[3:0], MC_OUT);
 	mux_8x1_32b muxB (MB_OUT,CU_OUT[24:22],PB, SHIFTER_OUT, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0);
-	shifter SHIFTER (SHIFTER_OUT,FR_Q[2],PB,IR,FR_Q[2],1'd1);
+	shifter SHIFTER (SHIFTER_OUT,FLAGS[3],PB,IR,FR_Q[3],1'd1);
 
 
 	initial
@@ -39,8 +40,8 @@ module dp_phase1;
 
 			MOC=1'd0; COND=1'd0;LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 		
 
-		//	IR = 32'b11100001101110101000000000101100;		//MOV
-		//	#200;
+		    IR = 32'b11100001101110101000000000101100;		//MOV
+		    #200;
 			IR = 32'b11100000100110100001000000101100;		//State 10
 			#20;
 			/*
@@ -55,8 +56,8 @@ module dp_phase1;
 	initial
 		begin
 		
-			$display("Rn   Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU   FR   Z  C  N  V 	    	    Time"); 
-			$monitor("%d 	%d   %d  %d %d %d %d  %d    %d   %b     %d  %d  %d  %d  %d ",IR[19:16],IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,FR_Q,Z,C,N,V, $time); 
+			$display("Rn  CondT Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU   FR   ZCNV 	    	    Time"); 
+			$monitor("%d    %d	%d   %d  %d %d %d %d  %d    %d   %b     %b  %d ",IR[19:16],CONDTESTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,FR_Q,FLAGS, $time); 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 		//
 
