@@ -1,5 +1,5 @@
-//---------------------Mux 8x1 1bit----------------------
-module mux_8x1 (output reg Y, input [2:0]S, input A,B,C,D,E,F,G,H);
+//---------------------Mux 8x1 32bit----------------------
+module mux_8x1_32b (output reg[31:0] Y, input [2:0]S, input[31:0] A,B,C,D,E,F,G,H);
 	
 	//Test for selection bit
 	always @ (S,A,B,C,D,E,F,G,H)

@@ -1,3 +1,4 @@
+
 //---------------------Mux 8x1 1bit----------------------
 module mux_8x1 (Y, S, A, B, C, D, E, F, G, H);
 	
@@ -22,5 +23,4 @@ module mux_8x1 (Y, S, A, B, C, D, E, F, G, H);
 			3'b111:	Y=H;
 
 		endcase // S
-
 endmodule // mux_8x1

@@ -1,5 +1,5 @@
-//---------------------Mux 4x1 8bits----------------------
-module mux_4x1 (output reg[7:0] Y, input [1:0]S, input[7:0] A,B,C,D);
+//---------------------Mux 4x1 4bits----------------------
+module mux_4x1_4b (output reg[3:0] Y, input [1:0]S, input[3:0] A,B,C,D);
 	
 	//Test for selection bit
 	always @ (S,A,B,C,D)
