@@ -22,7 +22,7 @@ module dp_phase1;
 	parameter sim_time = 1000;
 
 	//modules instantiation
-	controlUnit_p cu1(CU_OUT,IR,MOC,COND,LSM_DETECT,LSM_END,CLK);
+	controlUnit_p cu1(CU_OUT,IR,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
 	ALU_V1 alu(ALU_OUT,C,Z,V,N,MB_OUT,PA,FR_Q[3], {1'b0,IR[24:21]});
 	flagRegister FR(FR_Q,Z,C,N,V,CU_OUT[33],CLK);
 	CondTester conditionTester (CONDTESTER_OUT,IR[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
