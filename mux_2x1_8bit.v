@@ -5,8 +5,15 @@
 //B- |1
 // 
 
-module mux_2x1 (output reg[7:0] Y, input S, input[7:0] A,B);
+module mux_2x1_8bit (Y, S, A, B);
 	
+	//Inputs
+	input wire [7:0] A, B;
+	input wire S;
+
+	//Outputs
+	output reg [7:0] Y;
+
 	//Test for selection bit
 	always @ (S, A, B)
 

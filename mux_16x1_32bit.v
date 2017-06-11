@@ -1,5 +1,12 @@
-module mux_16x1 (output reg [31:0]Y, input[3:0]S, input [31:0]A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P);
+module mux_16x1_32bit (Y, S, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P);
 
+	//Inputs
+	input wire [31:0] A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P;
+	input wire [3:0] S;
+
+	//Outputs
+	output reg [31:0] Y;
+	
 	always @ (S,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)
 
 	case(S)
@@ -21,4 +28,4 @@ module mux_16x1 (output reg [31:0]Y, input[3:0]S, input [31:0]A,B,C,D,E,F,G,H,I,
 		4'b1110: Y=O;		//Output is O
 		4'b1111: Y=P;		//Output is P
 	endcase // S	
-endmodule // mux_16x1
+endmodule // mux_16x1_32bit
