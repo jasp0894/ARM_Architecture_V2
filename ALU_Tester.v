@@ -13,6 +13,7 @@ reg	CIN; 				//input carry
 //--------------output
 wire[31:0] R; 			//32-bit ALU result
 wire  C,V,N,Z;			//condition codes
+wire[3:0] FLAG;
 
 
 //-----------------ARM Instruction set definition---------------------
@@ -49,13 +50,15 @@ wire  C,V,N,Z;			//condition codes
 //simulation parameters
 parameter sim_time = 100000;	//simulation time
 
-ALU_V1 ALU(R,C,Z,V,N,A,B,CIN,OP);		//ALU module instantiation
+ALU_V1 ALU(R,FLAG,A,B,CIN,OP);		//ALU module instantiation
 initial #sim_time $finish;		//simulation termination time
 
 initial	begin
 	//initializing inputs
+	
 	CIN = 0;		//Input Carry equals 0
 	A = 0; B = 0;
+
 	//--------------------------------AND	
 /*	OP = AND;			
 	#10; A = 32'h12344567; B = 32'h0000FE18;
@@ -250,7 +253,7 @@ end
 initial begin 
 	$display(" OP   A        B        CIN Result   Z N V C 	   	      Time");		//prints header
 	$display("**********************************************************************");
-	$monitor(" %b %h %h %b   %h %b %b %b %b %d", OP, A, B, CIN, R, Z, N, V, C, $time);		//print signals
+	$monitor(" %b %h %h %b   %h %b  %d", OP, A, B, CIN, R, FLAG, $time);		//print signals
 end
 
 endmodule
