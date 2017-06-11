@@ -1,0 +1,135 @@
+#! c:/iverilog-x64/bin/vvp
+:ivl_version "10.1 (stable)" "(v10_1_1)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0000000000822830 .scope module, "lsm_manager_s" "lsm_manager_s" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "LSM_EN"
+    .port_info 1 /INPUT 3 "LSM_IN_3_0"
+    .port_info 2 /INPUT 32 "IR"
+    .port_info 3 /INPUT 1 "LSM_END"
+    .port_info 4 /INPUT 1 "CLK"
+    .port_info 5 /OUTPUT 16 "LSMAHR"
+    .port_info 6 /OUTPUT 4 "LSM_COUNTER"
+o0000000000857d78 .functor BUFZ 1, C4<z>; HiZ drive
+v00000000008229b0_0 .net "CLK", 0 0, o0000000000857d78;  0 drivers
+o0000000000857da8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000000000822a50_0 .net "IR", 31 0, o0000000000857da8;  0 drivers
+v00000000008a8a70_0 .var "LSMAHR", 15 0;
+v00000000008a8b10_0 .var "LSM_COUNTER", 3 0;
+o0000000000857e38 .functor BUFZ 1, C4<z>; HiZ drive
+v00000000008a8bb0_0 .net "LSM_EN", 0 0, o0000000000857e38;  0 drivers
+o0000000000857e68 .functor BUFZ 1, C4<z>; HiZ drive
+v00000000008a8c50_0 .net "LSM_END", 0 0, o0000000000857e68;  0 drivers
+o0000000000857e98 .functor BUFZ 3, C4<zzz>; HiZ drive
+v00000000008a8cf0_0 .net "LSM_IN_3_0", 2 0, o0000000000857e98;  0 drivers
+E_00000000001cdfa0 .event posedge, v00000000008229b0_0;
+    .scope S_0000000000822830;
+T_0 ;
+    %wait E_00000000001cdfa0;
+    %load/vec4 v00000000008a8bb0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %load/vec4 v00000000008a8cf0_0;
+    %parti/s 1, 0, 2;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %fork t_1, S_0000000000822830;
+    %fork t_2, S_0000000000822830;
+    %join;
+    %join;
+    %jmp t_0;
+t_1 ;
+    %load/vec4 v0000000000822a50_0;
+    %parti/s 16, 0, 2;
+    %assign/vec4 v00000000008a8a70_0, 0;
+    %end;
+t_2 ;
+    %load/vec4 v0000000000822a50_0;
+    %parti/s 1, 23, 6;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.4, 8;
+    %pushi/vec4 15, 0, 4;
+    %assign/vec4 v00000000008a8b10_0, 0;
+    %jmp T_0.5;
+T_0.4 ;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v00000000008a8b10_0, 0;
+T_0.5 ;
+    %end;
+    .scope S_0000000000822830;
+t_0 ;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v00000000008a8cf0_0;
+    %cmpi/e 6, 0, 3;
+    %jmp/0xz  T_0.6, 4;
+    %load/vec4 v0000000000822a50_0;
+    %parti/s 1, 23, 6;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.8, 8;
+    %fork t_4, S_0000000000822830;
+    %fork t_5, S_0000000000822830;
+    %join;
+    %join;
+    %jmp t_3;
+t_4 ;
+    %load/vec4 v00000000008a8a70_0;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %shiftl 4;
+    %assign/vec4 v00000000008a8a70_0, 0;
+    %end;
+t_5 ;
+    %load/vec4 v00000000008a8c50_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.10, 8;
+    %load/vec4 v00000000008a8b10_0;
+    %subi 1, 0, 4;
+    %assign/vec4 v00000000008a8b10_0, 0;
+T_0.10 ;
+    %end;
+    .scope S_0000000000822830;
+t_3 ;
+    %jmp T_0.9;
+T_0.8 ;
+    %fork t_7, S_0000000000822830;
+    %fork t_8, S_0000000000822830;
+    %join;
+    %join;
+    %jmp t_6;
+t_7 ;
+    %load/vec4 v00000000008a8a70_0;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %shiftr 4;
+    %assign/vec4 v00000000008a8a70_0, 0;
+    %end;
+t_8 ;
+    %load/vec4 v00000000008a8c50_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.12, 8;
+    %load/vec4 v00000000008a8b10_0;
+    %addi 1, 0, 4;
+    %assign/vec4 v00000000008a8b10_0, 0;
+T_0.12 ;
+    %end;
+    .scope S_0000000000822830;
+t_6 ;
+T_0.9 ;
+T_0.6 ;
+T_0.3 ;
+T_0.0 ;
+    %jmp T_0;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "lsm_manager_s.v";

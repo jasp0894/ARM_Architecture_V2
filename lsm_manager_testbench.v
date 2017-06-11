@@ -8,11 +8,11 @@ module lsm_manager_testbench;
 	reg	[31:0] IR;
 	reg CLK;
 //Ouputs of the lsm_manager
-	reg [3:0] LSM_ADRR_3_0;
 	reg LSM_DETECT;
 	reg LSM_END;
+	reg [3:0] LSM_COUNTER;
 //Call the lsm_manager module
-	lsm_manager lsm_manager (LSM_EN, LSM_IN_3_0, IR, CLK, LSM_ADRR_3_0, LSM_DETECT, LSM_END);
+	lsm_manager lsm_manager (LSM_EN, LSM_IN_3_0, IR, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
 
 //Initialize the inputs to the lsm_manager
 	initial

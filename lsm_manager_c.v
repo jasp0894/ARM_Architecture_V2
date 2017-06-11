@@ -1,4 +1,4 @@
-module lsm_manager_c (LSM_EN, IR_23, LSMAHR_0, LSMAHR_15, LSM_DETECT, LSM_END);
+module lsm_manager_c (LSM_EN, IR_23, LSMAHR_0, LSMAHR_15, LSM_COUNTER, LSM_DETECT, LSM_END);
 
 //This is the combinational circuit of the Load/Store multiple manager.
 //The module is concerned entirely with the check state by
@@ -51,5 +51,10 @@ module lsm_manager_c (LSM_EN, IR_23, LSMAHR_0, LSMAHR_15, LSM_DETECT, LSM_END);
 					else 										//The counter has NOT finished.
 						LSM_END <= 1'b0;					//Signal that the counter has NOT finished.
 				join
+		else
+			fork
+				LSM_DETECT <= 0;
+				LSM_END <= 0;
+			join
 
 endmodule // lsm_manager_c
