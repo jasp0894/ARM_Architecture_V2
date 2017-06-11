@@ -53,7 +53,7 @@ module shifter (output reg[31:0] SHIFTER_OPERAND, output reg COUT, input [31:0] 
 						begin
 							RegTemp = {28'd0,IR[3:0]};
 							SHIFTER_OPERAND = RegTemp >>> IR[11:7];
-							COUT = RM[IR[11:7] - 1];
+							COUT = RegTemp[IR[11:7] - 1];
 						end
 
 
