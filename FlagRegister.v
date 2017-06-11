@@ -20,7 +20,7 @@ module flagRegister(output reg[3:0] Q, input Z,C,N,V,ENABLE,CLK);
 		Q[2]<=C;		//output initialization
 		Q[1]<=N;		//output initialization
 		Q[0]<=V;		//output initialization
-	end
+	    end
 	else
 	Q <= Q;
 

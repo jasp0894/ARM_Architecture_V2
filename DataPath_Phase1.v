@@ -30,7 +30,7 @@ module dp_phase1;
 	mux_8x1_4b muxC (MC_OUT,CU_OUT[21:19],IR[19:16], 4'b1111, 4'b1110, IR[15:12], 4'd0, 4'd0, 4'd0, 4'd0);
 	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT[32],MA_OUT,IR[3:0], MC_OUT);
 	mux_8x1_32b muxB (MB_OUT,CU_OUT[24:22],PB, SHIFTER_OUT, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0, 32'd0);
-	shifter SHIFTER (SHIFTER_OUT,C,PB,IR,1'b0,1'd1);
+	shifter SHIFTER (SHIFTER_OUT,FR_Q[2],PB,IR,FR_Q[2],1'd1);
 
 
 	initial
@@ -55,8 +55,8 @@ module dp_phase1;
 	initial
 		begin
 		
-			$display("Rn   SOperand   Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU  Z  C  N  V 	    	    Time"); 
-			$monitor("%d %d 	%d   %d  %d %d %d %d  %d    %d   %d  %d  %d  %d  %d ",IR[19:16],SHIFTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V, $time); 
+			$display("Rn   SOperand   Rd  MA  MC  	     PA      PB       SHIFT         MB  	   ALU   FR   Z  C  N  V 	    	    Time"); 
+			$monitor("%d %d 	%d   %d  %d %d %d %d  %d    %d   %b     %d  %d  %d  %d  %d ",IR[19:16],SHIFTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,FR_Q,Z,C,N,V, $time); 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 		//
 
