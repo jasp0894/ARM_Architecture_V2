@@ -22,6 +22,6 @@ module lsm_manager (LSM_EN,
 //Call modules
 
 	lsm_manager_s LSMsequential(LSM_EN, LSM_IN_3_0, IR, LSM_END, CLK, LSMAHR, LSM_COUNTER);
-	lsm_manager_c LSMcombinational(LSM_EN, IR[23], LSMAHR[0], LSMAHR[15], LSM_DETECT, LSM_END);
+	lsm_manager_c LSMcombinational(LSM_EN, IR[23], LSMAHR[0], LSMAHR[15], LSM_COUNTER, LSM_DETECT, LSM_END);
 
-endmodule // lsm_manager_s
+endmodule // lsm_manager
