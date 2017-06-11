@@ -1,6 +1,14 @@
 //---------------------Mux 8x1 32bit----------------------
-module mux_8x1_32b (output reg[31:0] Y, input [2:0]S, input[31:0] A,B,C,D,E,F,G,H);
+module mux_8x1_32bit (Y, S, A, B, C, D, E, F, G, H);
 	
+	//Inputs
+	input wire [31:0] A,B,C,D,E,F,G,H;
+	input wire [2:0] S;
+
+	//Outputs
+	output reg [31:0] Y;
+
+
 	//Test for selection bit
 	always @ (S,A,B,C,D,E,F,G,H)
 
@@ -16,4 +24,4 @@ module mux_8x1_32b (output reg[31:0] Y, input [2:0]S, input[31:0] A,B,C,D,E,F,G,
 
 	endcase // S
 
-endmodule // mux_8x1
+endmodule // mux_8x1_32bit

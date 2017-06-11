@@ -1,6 +1,13 @@
 //---------------------Mux 4x1 4bits----------------------
-module mux_4x1_5b (output reg[4:0] Y, input [1:0]S, input[4:0] A,B,C,D);
+module mux_4x1_5bit (Y, S, A, B, C, D);
 	
+	//Inputs
+	input wire [4:0] A,B,C,D;
+	input wire [1:0] S;
+
+	//Outputs
+	output reg [4:0] Y;
+
 	//Test for selection bit
 	always @ (S,A,B,C,D)
 
