@@ -1,4 +1,4 @@
-module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, ExtAddress, CLK, MOC, DataOut);
+module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, ExtAddress, MOC, DataOut);
 
 	//Inputs
 	input wire MOV;						//Indicates memory that an operation will be performed.
@@ -6,8 +6,7 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, ExtAddress, CLK, MOC, DataOut
 	input wire [2:0] MS_2_0;			//Allows selection of the data size and indicates if the data is signed?
 	input wire [31:0] DataIn;			//Input bus of data of the RAM.
 	input wire [31:0] ExtAddress;		//Indicates the memory location to be accessed.
-	input wire CLK;						//Clock signal.
-
+	
 	//Outputs
 	output reg MOC;						//Indicates if memory operation finished.
 	output reg [31:0] DataOut;			//Output bus of the ram.
@@ -19,61 +18,77 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, ExtAddress, CLK, MOC, DataOut
 	//Ram Implementation
 	always@(MOV)
 		if(MOV)
-			if(ReadWrite)					//Perform read operation
-				case (MS_2_0)		//Determine the data size and the sign extension.
-					3'b000: begin	//Byte sized data.
+			if(ReadWrite)			//PERFORM READ OPERATION
+				if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
+					begin
+						fork
 							DataOut[7:0] = memory[ExtAddress];	//Place byte in output bus.
-							MOC = 1'b1;					//Memory completed operation.
-							end
+							//Sign extension.
+							if(MS_2_0[2] == 1'b1)	//If true perform sign extension.
+								if(memory[ExtAddress][7] == 1'b0)	//If MSB is zero
+									DataOut[31:8] = 24'd0;			//Sign extend with zeros.
+								else								//MSB was one.
+									DataOut[31:8] = 24'd0;			//Sign extedn with ones.
+							else	//Fill the rest of the bits with 0's
+								DataOut[31:8] = 24'd0;
+						join
+						MOC = 1'b1;							//Memory completed operation.
+					end
+				else if (MS_2_0[1:0] == 2'b01)	//Halfword sized data.
+					begin
+						//HalfWords can only be accessed through even addresses.
+						fork
+							DataOut[15:8] = memory[IntAddress & 1'b0];		//Big endian convention.
+							DataOut[7:0] = memory[IntAddress & 1'b0 + 1];	//Read 2nd byte.
+							//Sign extension
+							if(MS_2_0[2] == 1'b1)	//If true perform sign extension.
+								if(memory[ExtAddress][15] == 1'b0)	//If MSB is zero
+									DataOut[31:16] = 16'd0;			//Sign extend with zeros.
+								else								//MSB was one.
+									DataOut[31:16] = 16'd0;			//Sign extedn with ones.
+							else	//Fill the rest of the bits with 0's
+								DataOut[31:16] = 16'd0;
+						join
+						MOC = 1'b1;									//Indicate memory finished executing the task.
+					end
+				else if(MS_2_0[1:0] == 2'b10)	//Word sized data.
+					begin	
+						//Words can only be accessed each four memory addresses.
+						fork
+							DataOut[31:24] = memory[IntAddress & 2'b00];
+							DataOut[23:16] = memory[IntAddress & 2'b00 + 1];//Place 2nd byte on output bus.
+							DataOut[15:8] = memory[IntAddress & 2'b00 + 2];	//Read 3rd byte on output bus.
+							DataOut[7:0] = memory[IntAddress & 2'b00 + 3];	//Read 4th byte on output bus.	
+						join
+						MOC = 1'b1;									//Indicate memory finished executing the task.
+					end
 
-					3'b001: begin	//Halfword sized data.
-							//HalfWords can only be accessed through even addresses.
-							fork
-								DataOut[15:8] = memory[IntAddress & 1'b0];		//Big endian convention.
-								DataOut[7:0] = memory[IntAddress & 1'b0 + 1];	//Read 2nd byte.	
-							join
-							MOC = 1'b1;
-							end
+			else	//PERFORM WRITE OPERATION
 
-					3'b010: begin	//Word sized data.
-							//Words can only be accessed each four memory addresses.
-							fork
-								DataOut[31:24] = memory[IntAddress & 2'b00];
-								DataOut[23:16] = memory[IntAddress & 2'b00 + 1];//Place 2nd byte on output bus.
-								DataOut[15:8] = memory[IntAddress & 2'b00 + 2];	//Read 3rd byte on output bus.
-								DataOut[7:0] = memory[IntAddress & 2'b00 + 3];	//Read 4th byte on output bus.	
-							join
-							MOC = 1'b1;
-							end
-				endcase
-
-			else	//PERFORM READ OPERATION
-
-				case (MS_2_0)		//Determine the data size and the sign extension.
-					3'b000: begin	//Byte sized data.
-							memory[ExtAddress] = DataIn[7:0]; 	//Place byte in output bus.
-							MOC = 1'b1;					//Memory completed operation.
-							end
-
-					3'b001: begin	//Halfword sized data.
-							//HalfWords can only be accessed through even addresses.
-							fork
-								memory[IntAddress & 1'b0] = DataIn[15:8];		//Big endian convention.
-								memory[IntAddress & 1'b0 + 1] = DataIn[7:0];	//Read 2nd byte.	
-							join
-							MOC = 1'b1;
-			  				end
-
-					3'b010: begin	//Word sized data.
-							//Words can only be accessed each four memory addresses.
-							fork
-								memory[IntAddress & 2'b00] = DataIn[31:24];
-								memory[IntAddress & 2'b00 + 1] = DataIn[23:16];//Place 2nd byte on output bus.
-								memory[IntAddress & 2'b00 + 2] = DataIn[15:8];	//Read 3rd byte on output bus.
-								memory[IntAddress & 2'b00 + 3] = DataIn[7:0];	//Read 4th byte on output bus.	
-							join
-							MOC = 1'b1;
-							end
-				endcase
+				if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
+					begin
+						memory[ExtAddress] = DataIn[7:0]; 	//Place byte in output bus.
+						MOC = 1'b1;							//Memory completed operation.
+					end
+				else if(MS_2_0[1:0] == 2'b01)	//Halfword sized data.
+					begin	
+						//HalfWords can only be accessed through even addresses.
+						fork
+							memory[IntAddress & 1'b0] = DataIn[15:8];		//Big endian convention.
+							memory[IntAddress & 1'b0 + 1] = DataIn[7:0];	//Read 2nd byte.
+						join
+						MOC = 1'b1;									//Indicate memory finished executing the task.
+			  		end
+			  	else if(MS_2_0[1:0] == 2'b10)	//Word sized data.
+					begin
+						//Words can only be accessed each four memory addresses.
+						fork
+							memory[IntAddress & 2'b00] = DataIn[31:24];
+							memory[IntAddress & 2'b00 + 1] = DataIn[23:16];//Place 2nd byte on output bus.
+							memory[IntAddress & 2'b00 + 2] = DataIn[15:8];	//Read 3rd byte on output bus.
+							memory[IntAddress & 2'b00 + 3] = DataIn[7:0];	//Read 4th byte on output bus.	
+						join
+						MOC = 1'b1;									//Indicate memory finished executing the task.
+					end
 
 endmodule // ram256x8_c
