@@ -24,7 +24,7 @@ module controlUnit_p(output reg [33:0] CU, input [31:0] IR, input MOC, COND, LSM
 
 		    Encoder encoder(ENC_OUT,IR);
 
-		    mux_4x1 muxA(MA_OUT,M1M0,ENC_OUT,8'd0,CTL_REG_OUT[41:34],ME);
+		    mux_4x1_8bit muxA(MA_OUT,M1M0,ENC_OUT,8'd0,CTL_REG_OUT[41:34],ME);
 
 
 			rom ROM(ROM_OUT,MA_OUT);
@@ -37,11 +37,11 @@ module controlUnit_p(output reg [33:0] CU, input [31:0] IR, input MOC, COND, LSM
 		    Reg8bits incrementerRegister(INC_REG_OUT,ADD_OUT,1'd1,CLK);
 
 
-		    mux_2x1 muxE(ME,CTL_REG_OUT[53],INC_REG_OUT,CTL_REG_OUT[49:42]);
+		    mux_2x1_8bit muxE(ME,CTL_REG_OUT[53],INC_REG_OUT,CTL_REG_OUT[49:42]);
 
 
 
-	        mux_8x1 muxC (MC_OUT,CTL_REG_OUT[52:50], MOC, COND, IR[20], LSM_DETECT, LSM_END,IR[21],1'd0,1'd0);
+	        mux_8x1_1bit muxC (MC_OUT,CTL_REG_OUT[52:50], MOC, COND, IR[20], LSM_DETECT, LSM_END,IR[21],1'd0,1'd0);
 
 		    InverterCU inv(INV_OUT, MC_OUT,CTL_REG_OUT[54]);
 

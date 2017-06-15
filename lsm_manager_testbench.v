@@ -30,10 +30,10 @@ module lsm_manager_testbench;
 			#1 fork
 			LSM_EN = 1'b1;
 			LSM_IN_3_0 = 3'b001;
-			IR = 32'b00000000100000001101010101010101;
+			IR = 32'b00000001110000001100110011001100;
 			join
 
-			#5 LSM_IN_3_0 = 3'b110;
+			#4 LSM_IN_3_0 = 3'b110;
 
 		end
 //Setup the CLK signal
@@ -43,8 +43,8 @@ module lsm_manager_testbench;
 //Monitoring	
 initial
 		begin
-			$display("LSM_EN 	LSM_IN_3_0 	IR 				CLK 	LSM_DETECT 	LSM_END 	LSM_COUNTER 		TIME");
-			$monitor("%b 	%b 	%b 	%b 	%b 		%b 			%d 	%d", LSM_EN, LSM_IN_3_0, IR, CLK, LSM_DETECT, LSM_END, LSM_COUNTER, $time);
+			$display("LSM_EN 	LSM_IN_3_0 	IR 				CLK 	LSM_DETECT 	LSM_END 	LSM_COUNTER 	LSMAHR 		TIME");
+			$monitor("%b 	%b 	%b 	%b 	%b 		%b 			%d 	 %b	%d", LSM_EN, LSM_IN_3_0, IR, CLK, LSM_DETECT, LSM_END, LSM_COUNTER, lsm_manager.LSMsequential.LSMAHR, $time);
 		end
 
 initial #sim_time $finish;

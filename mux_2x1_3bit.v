@@ -5,14 +5,14 @@
 //B- |1
 // 
 
-module mux_2x1_8bit (Y, S, A, B);
+module mux_2x1_3bit (Y, S, A, B);
 	
 	//Inputs
-	input wire [7:0] A, B;
+	input wire [2:0] A, B;
 	input wire S;
 
 	//Outputs
-	output reg [7:0] Y;
+	output reg [2:0] Y;
 
 	//Test for selection bit
 	always @ (S, A, B)
@@ -22,4 +22,4 @@ module mux_2x1_8bit (Y, S, A, B);
 		1'b1:	Y=B;
 	endcase // S
 
-endmodule // mux_2x1
+endmodule // mux_2x1_3bit
