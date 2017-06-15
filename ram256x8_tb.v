@@ -1,15 +1,18 @@
 module ram256x8_tb;
 	
 //Simulation Setup
-
+	//Simulation preparation
 	integer fi, fo, code;
-	
+	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
+	reg [2:0] CaseCounter;		//Used to feed the memory different CPU control signals
+	reg [1:0] CPUstate;			//Simulates the state of the CPU.
+
 	//Inputs
-	reg MOV;						//Indicates memory that an operation will be performed.
+	reg MOV;					//Indicates memory that an operation will be performed.
 	reg ReadWrite;				//Indicates memory which type of operation will be performed.
 	reg [2:0] MS_2_0;			//Allows selection of the data size and indicates if the data is signed?
 	reg [31:0] DataIn;			//Input bus of data of the RAM.
-	reg [31:0] Address;		//Indicates the memory location to be accessed.
+	reg [31:0] Address;			//Indicates the memory location to be accessed.
 	reg CLK;
 
 	//Outputs
@@ -45,133 +48,94 @@ module ram256x8_tb;
 	//Interact with memory
 	initial
 		begin
-			fo = $fopen("ramoutput.txt", "w");	//Open memory output file
-			
-			//Reading a byte
-				Address = 32'd5;							//Select memory location.
-				MS_2_0 = 3'b000;							//Select the data size
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;								//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;								//Operation completed.
-
-			//Reading a half-word
-				Address = 32'd14;							//Select memory location.
-				MS_2_0 = 3'b001;							//Select the data size.
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-			//Reading a word
-				Address = 32'd18;							//Select memory location.
-				MS_2_0 = 3'b010;							//Select the data size.
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.	
-
-			//Reading a double-word
-				Address = 32'd22;							//Select memory location.
-				MS_2_0 = 3'b011;							//Select the data size.
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				Address = 32'd26;							//Select memory location.
-					
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-			//==========Perform Write Operation=============================================================================================
-			//The objective is to write on memory and then read the data from the written locations.
-			//These observations are provided because all the read operations' data is sent to the SAME output file.
-
-			//Writing a byte
-				Address = 32'd0;							//Select memory location.
-				MS_2_0 = 3'b000;							//Select the data size
-				DataIn = 32'b11111111;						//Data to be written
-				ReadWrite = 1'b0;							//Perform write operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				MS_2_0 = 3'b010;
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-			//The interpretation for the bits that appear when performing a read in this ocassion is that since the memory
-			//is already pre-charged there may be values of no importance at the output bus of the RAM. Its up to the
-			//processor to interpret correctly the bit locations for which "it" asked for "information".
-
-			//Writing a half-word
-				Address = 32'd10;							//Select memory location.
-				MS_2_0 = 3'b001;							//Select the data size
-				DataIn = 32'b1111111111111111;			//Data to be written
-				ReadWrite = 1'b0;							//Perform write operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				MS_2_0 = 3'b010;
-				Address = 32'd8;
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-			//Writing a word
-				Address = 32'd13;							//Select memory location.
-				MS_2_0 = 3'b010;							//Select the data size
-				DataIn = 32'b11000000000000000000000000000001;			//Data to be written
-				ReadWrite = 1'b0;							//Perform write operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-			//Writing a double-word
-				//Since the bus sizes are only of 32 bits, when a double-word is to be written the processor must take such limitation
-				//into account and update the Address of the first word by 4. Thus, all the responsability of updating the Address is
-				//solely resting on the processor and the memory has nothing to do with this.
-
-				Address = 32'd25;							//Select memory location.
-				MS_2_0 = 3'b011;							//Select the data size
-				DataIn = 32'b11000000000000000001111100000001; //Data to be written
-				ReadWrite = 1'b0;							//Perform write operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				//Prepare and write the next word.
-
-				Address = 32'd29;							//Note the updated Address.
-				MS_2_0 = 3'b011;							//Select the data size
-				DataIn = 32'b11111111111110000111111111111111; //Data to be written
-				ReadWrite = 1'b0;							//Perform write operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-				ReadWrite = 1'b1;							//Perform read operation.
-
-				#5 MOV = 1'b1;							//Indicates the RAM to perform an operation.
-				#5 MOV = 1'b0;							//Operation completed.
-
-					
-
+			//Initialize the clock
+			CLK = 1'b0;
+			//Open memory output file
+			fo = $fopen("ramoutput.txt", "w");
+			//CPU initial state
+			MOV = 1'b0;
+			CaseCounter = 5'd0;
+			CPUstate = 3'd0;
 		end
+
+
+	always@(posedge CLK)
+		if(CaseCounter != 3'd6)
+			case(CPUstate)
+
+				2'b00: //State 0: Place control signals
+
+					case(CaseCounter) //Setup the desired control signals.
+						3'b000: //Reading a byte
+							begin
+								Address = 32'd5;					//Select memory location.
+								MS_2_0 = 3'b000;					//Select the data size
+								ReadWrite = 1'b1;					//Perform read operation.
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+						3'b001: //Reading a half-word
+							begin
+								Address = 32'd14;					//Select memory location.
+								MS_2_0 = 3'b001;					//Select the data size.
+								ReadWrite = 1'b1;					//Perform read operation.
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+						3'b010: //Reading a word
+							begin
+								Address = 32'd18;							//Select memory location.
+								MS_2_0 = 3'b010;							//Select the data size.
+								ReadWrite = 1'b1;
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+
+
+						3'b011: //Writing a byte
+							begin
+								Address = 32'd0;							//Select memory location.
+								MS_2_0 = 3'b000;							//Select the data size
+								DataIn = 32'b11111111;						//Data to be written
+								ReadWrite = 1'b0;
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+						3'b100: //Writing a half-word
+							begin
+								Address = 32'd10;							//Select memory location.
+								MS_2_0 = 3'b001;							//Select the data size
+								DataIn = 32'b1111111111111111;			//Data to be written
+								ReadWrite = 1'b0;							//Perform write operation.
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+						3'b100: //Writing a word
+							begin
+								Address = 32'd13;							//Select memory location.
+								MS_2_0 = 3'b010;							//Select the data size
+								DataIn = 32'b11000000000000000000000000000001;			//Data to be written
+								ReadWrite = 1'b0;
+								CaseCounter = CaseCounter + 1;
+								CPUstate = 2'b01
+							end
+
+					endcase // CaseCounter
+
+				2'b01://State1: Perform Operatio State
+					begin
+						MOV = 1'b1;
+						CPUstate = 2'b10;
+					end
+
+				2'b10://State3: Do some other stuff not related to memory
+					begin
+						MOV = 1'b0;
+						CPUstate = 2'b00;
+					end
+
+			endcase //CPUstate
+
 
 	//Clock signal setup
 	always #1 CLK = ~CLK;
@@ -181,12 +145,15 @@ initial #sim_time $finish;
 initial
 	begin
 		$display("MOV 	MOC 	CLK 	TIME");
-		$monitor("%b 	%b 	%b 	%b 	%d",MOV, MOC, CLK, $time);
+		$monitor("%b 	%b 	%b %d",MOV, MOC, CLK, $time);
 	end
 
-/*always @(RAMdone) begin
-		if(RAMdone)								//If the RAM signals it completed the current operation and the operation was read,
-			if(ReadWrite) 						//Avoid storing data from write operations.
-				$fdisplay(fo,"Contents of memory location %d are %b",address, RAMout);		//Place the bits in the output bus of the RAM in a file.
-*/
+always @(MOC)
+	begin
+		if(MOC)							//If the RAM signals it completed the current operation and the operation was read,
+			if(ReadWrite) 				//Avoid storing data from write operations.
+				$fdisplay(fo,"Contents of memory location %d are %b",Address, DataOut);		//Place the bits in the output bus of the RAM in a file.
+			//Note that you must read from memory in order to write in the ouput file.
+	end
+
 endmodule // ram256x8_tb
