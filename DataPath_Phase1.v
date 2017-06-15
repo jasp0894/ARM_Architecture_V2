@@ -82,9 +82,14 @@ module dp_phase1;
 
 
 
-		    IR = 32'b11100001101110101000000000101100;		//MOV
+		    	
+		    IR = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
+
 
 		    #200;
+
+		    IR= 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
+		     #200;
 
 			//IR = 32'b11100000100110100001000000101100;		//State 10
 
@@ -114,7 +119,7 @@ module dp_phase1;
 
 		
 
-			$display("CU 				    Rn  CondT    Rd  MA  MC  	   PA         PB       SHIFT    MB_S  	   ALU   FR   CZVN 	    	    Time"); 
+			$display("CU 				    Rn  CondT    Rd  MA  MC  	   PA         PB       SHIFT  MB_S  	     ALU   FR   CZVN 	    	    Time"); 
 
 			$monitor(" %b   %d    %d	%d   %d  %d %d %d %d  %d    %d   %b     %b  %d ",CU_OUT,IR[19:16],CONDTESTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS, $time); 
 
