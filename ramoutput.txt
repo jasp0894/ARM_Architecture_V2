@@ -1,0 +1,13 @@
+Contents of memory location          5 are xxxxxxxxxxxxxxxxxxxxxxxx11111111
+Contents of memory location         14 are xxxxxxxxxxxxxxxx0011001100000000
+Contents of memory location         18 are 00110011000000001100110011111111
+Contents of memory location         22 are 00110011000000001100110011111111
+Contents of memory location         26 are 00110011000000001100110011111111
+Contents of memory location          0 are 11111111111111110011001100000000
+Contents of memory location          8 are 11001100111111111111111111111111
+Contents of memory location         13 are 11000000000000000000000000000001
+Contents of memory location         13 are 11000000000000000000000000000001
+Contents of memory location         25 are 11000000000000000001111100000001
+Contents of memory location         25 are 11000000000000000001111100000001
+Contents of memory location         29 are 11111111111110000111111111111111
+Contents of memory location         29 are 11111111111110000111111111111111
