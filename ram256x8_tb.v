@@ -72,7 +72,7 @@ module ram256x8_tb;
 								MS_2_0 = 3'b000;					//Select the data size
 								ReadWrite = 1'b1;					//Perform read operation.
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 						3'b001: //Reading a half-word
 							begin
@@ -80,7 +80,7 @@ module ram256x8_tb;
 								MS_2_0 = 3'b001;					//Select the data size.
 								ReadWrite = 1'b1;					//Perform read operation.
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 						3'b010: //Reading a word
 							begin
@@ -88,7 +88,7 @@ module ram256x8_tb;
 								MS_2_0 = 3'b010;							//Select the data size.
 								ReadWrite = 1'b1;
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 
 
@@ -99,7 +99,7 @@ module ram256x8_tb;
 								DataIn = 32'b11111111;						//Data to be written
 								ReadWrite = 1'b0;
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 						3'b100: //Writing a half-word
 							begin
@@ -108,7 +108,7 @@ module ram256x8_tb;
 								DataIn = 32'b1111111111111111;			//Data to be written
 								ReadWrite = 1'b0;							//Perform write operation.
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 						3'b100: //Writing a word
 							begin
@@ -117,7 +117,7 @@ module ram256x8_tb;
 								DataIn = 32'b11000000000000000000000000000001;			//Data to be written
 								ReadWrite = 1'b0;
 								CaseCounter = CaseCounter + 1;
-								CPUstate = 2'b01
+								CPUstate = 2'b01;
 							end
 
 					endcase // CaseCounter
