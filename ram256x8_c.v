@@ -63,8 +63,11 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 							join
 							MOC = 1'b1;									//Indicate memory finished executing the task.
 						end
+					else //This is used to avoid falling into any other combination not supported.
+						begin
+						end
 
-				else	//PERFORM WRITE OPERATION
+/*Write Op.*/	else	//PERFORM WRITE OPERATION
 
 					if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
 						begin
@@ -90,6 +93,9 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 								memory[Address & 2'b00 + 3] = DataIn[7:0];	//Read 4th byte on output bus.	
 							join
 							MOC = 1'b1;									//Indicate memory finished executing the task.
+						end
+					else	//This is used to avoid falling into any other combination not supported.
+						begin
 						end
 			//MOC signal management.
 			if(MOCoff)
