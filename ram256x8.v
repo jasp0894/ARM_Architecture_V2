@@ -5,11 +5,11 @@ module ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);
 	input wire ReadWrite;				//Indicates memory which type of operation will be performed.
 	input wire [2:0] MS_2_0;			//Allows selection of the data size and indicates if the data is signed?
 	input wire [31:0] DataIn;			//Input bus of data of the RAM.
-	input wire [31:0] Address;		//Indicates the memory location to be accessed.
+	input wire [31:0] Address;			//Indicates the memory location to be accessed.
 	input wire CLK;						//Clock signal.
 
 	//Outputs
-	output wire MOC;						//Indicates if memory operation finished.
+	output wire MOC;					//Indicates if memory operation finished.
 	output wire [31:0] DataOut;			//Output bus of the ram.
 
 	//Internal Connections
