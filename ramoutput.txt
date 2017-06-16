@@ -1,1 +1,3 @@
 Contents of memory location          5 are 00000000000000000000000011111111
+Contents of memory location         14 are 00000000000000001100110011001100
+Contents of memory location         18 are 11001100110011000011001100110011

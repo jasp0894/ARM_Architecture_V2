@@ -64,7 +64,7 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 							MOC = 1'b1;									//Indicate memory finished executing the task.
 						end
 
-				else	//PERFORM WRITE OPERATION
+				else if(ReadWrite == 1'b0)	//PERFORM WRITE OPERATION
 
 					if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
 						begin

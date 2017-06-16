@@ -1,4 +1,4 @@
-module ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, MOC, DataOut);
+module ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);
 
 	//Inputs
 	input wire MOV;						//Indicates memory that an operation will be performed.

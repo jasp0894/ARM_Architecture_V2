@@ -20,10 +20,10 @@ module ram256x8_tb;
 	output wire [31:0] DataOut;			//Output bus of the ram.
 
 	//Simulation parameters
-	parameter sim_time = 500;
+	parameter sim_time = 25;
 
 	//Call the memory module
-	ram256x8 ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, MOC, DataOut);	
+	ram256x8 ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);	
 
 
 
@@ -60,18 +60,20 @@ module ram256x8_tb;
 
 
 	always@(posedge CLK)
+		
 		if(CaseCounter != 3'd6)
+			
 			case(CPUstate)
 
 				2'b00: //State 0: Place control signals
 
 					case(CaseCounter) //Setup the desired control signals.
+					
 						3'b000: //Reading a byte
 							begin
 								Address = 32'd5;					//Select memory location.
 								MS_2_0 = 3'b000;					//Select the data size
 								ReadWrite = 1'b1;					//Perform read operation.
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
 						3'b001: //Reading a half-word
@@ -79,18 +81,17 @@ module ram256x8_tb;
 								Address = 32'd14;					//Select memory location.
 								MS_2_0 = 3'b001;					//Select the data size.
 								ReadWrite = 1'b1;					//Perform read operation.
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
 						3'b010: //Reading a word
 							begin
-								Address = 32'd18;							//Select memory location.
-								MS_2_0 = 3'b010;							//Select the data size.
+								Address = 32'd18;					//Select memory location.
+								MS_2_0 = 3'b010;					//Select the data size.
 								ReadWrite = 1'b1;
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
 
+//Writing operations
 
 						3'b011: //Writing a byte
 							begin
@@ -98,7 +99,6 @@ module ram256x8_tb;
 								MS_2_0 = 3'b000;							//Select the data size
 								DataIn = 32'b11111111;						//Data to be written
 								ReadWrite = 1'b0;
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
 						3'b100: //Writing a half-word
@@ -107,16 +107,14 @@ module ram256x8_tb;
 								MS_2_0 = 3'b001;							//Select the data size
 								DataIn = 32'b1111111111111111;			//Data to be written
 								ReadWrite = 1'b0;							//Perform write operation.
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
-						3'b100: //Writing a word
+						3'b101: //Writing a word
 							begin
 								Address = 32'd13;							//Select memory location.
 								MS_2_0 = 3'b010;							//Select the data size
 								DataIn = 32'b11000000000000000000000000000001;			//Data to be written
 								ReadWrite = 1'b0;
-								CaseCounter = CaseCounter + 1;
 								CPUstate = 2'b01;
 							end
 
@@ -132,6 +130,7 @@ module ram256x8_tb;
 					begin
 						MOV = 1'b0;
 						CPUstate = 2'b00;
+						CaseCounter <= CaseCounter + 1;
 					end
 
 			endcase //CPUstate
@@ -144,8 +143,8 @@ initial #sim_time $finish;
 
 initial
 	begin
-		$display("MOV 	MOC 	CLK 	TIME");
-		$monitor("%b 	%b 	%b %d",MOV, MOC, CLK, $time);
+		$display("MOV 	MOC 	CLK CaseCounter CPUstate	TIME");
+		$monitor("%b 	%b 	%b     %d         %d %d",MOV, MOC, CLK, CaseCounter, CPUstate, $time);
 	end
 
 always @(MOC)
