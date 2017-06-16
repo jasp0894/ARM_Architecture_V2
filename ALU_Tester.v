@@ -35,7 +35,7 @@ wire[3:0] FLAG;
 	parameter  BIC = 5'b01110;
 	parameter  MVN = 5'b01111;
 
-	parameter  OP1 = 5'b10000;
+	parameter  OP1 = {1'b1,4'b0000};
 	parameter  OP2 = 5'b10001;
 	parameter  OP3 = 5'b10010;
 	parameter  OP4 = 5'b10011;
@@ -60,7 +60,7 @@ initial	begin
 	A = 0; B = 0;
 
 	//--------------------------------AND	
-/*	OP = AND;			
+	OP = AND;			
 	#10; A = 32'h12344567; B = 32'h0000FE18;
 	#10; A = 32'h005AC023; B = 32'h0DAE2310;
 	#10;
@@ -182,7 +182,7 @@ initial	begin
 		#10; A = 32'h005AC023; B = 32'h0DAE2310;
 		#10;	
 
-*/
+
 
 
 

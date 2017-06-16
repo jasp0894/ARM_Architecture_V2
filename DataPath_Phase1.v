@@ -40,8 +40,7 @@ module dp_phase1;
 
 
 
-	parameter sim_time = 1000;
-
+	parameter sim_time = 3000;
 
 
 	//modules instantiation
@@ -50,7 +49,8 @@ module dp_phase1;
 
 	controlUnit_p cu1(CU_OUT,IR,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
 
-	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], {1'b0,IR[24:21]});
+
+	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3],{1'b0,IR[24:21]} );
 
 	
 
@@ -78,36 +78,20 @@ module dp_phase1;
 
 
 
-			MOC=1'd0; COND=1'd0;LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 		
+			MOC=1'd1; COND=1'd0;LSM_DETECT=1'd0; LSM_END=1'd0; CLK=1'd0; 		
 
 
 
 		    	
-		    IR = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
+		     IR = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
 
+	
 
-		    #200;
+		      IR= 32'b11100000100110001100000000100001;	//Rd=12; Rn=R8; shifterOperand=1
+		    											//expected R12 = 13;
 
-		    IR= 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
-		     #200;
+		    
 
-			//IR = 32'b11100000100110100001000000101100;		//State 10
-
-			//#20;
-
-			/*
-
-			IR =  32'b11110010100110100001000000101100; 		//state 11
-
-			#200;
-
-			IR= 32'b11110001001110100001000000101100;		//state 14
-
-			#200;
-
-			IR=  32'b11110011000110100001000000101100;			//state 15
-
-			#20;*/
 
 		end
 
@@ -119,9 +103,9 @@ module dp_phase1;
 
 		
 
-			$display("CU 				    Rn  CondT    Rd  MA  MC  	   PA         PB       SHIFT  MB_S  	     ALU   FR   CZVN 	    	    Time"); 
+			$display("CTLREG 	            					 	   Rn Rd  MA  MC         PA       PB        SHIFT   	  ALU  FR   CZVN    	      Time"); 
 
-			$monitor(" %b   %d    %d	%d   %d  %d %d %d %d  %d    %d   %b     %b  %d ",CU_OUT,IR[19:16],CONDTESTER_OUT,IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS, $time); 
+			$monitor("%b   %d %d  %d %d  %d %d %d  %d  %b %b %d",cu1.ctl_register.Q, IR[19:16],IR[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,ALU_OUT,FR_Q,FLAGS, $time); 
 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 
