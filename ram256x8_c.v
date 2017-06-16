@@ -29,7 +29,7 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 									if(memory[Address][7] == 1'b0)	//If MSB is zero
 										DataOut[31:8] = 24'd0;			//Sign extend with zeros.
 									else								//MSB was one.
-										DataOut[31:8] = 24'd0;			//Sign extedn with ones.
+										DataOut[31:8] = 24'b111111111111111111111111;			//Sign extedn with ones.
 								else	//Fill the rest of the bits with 0's
 									DataOut[31:8] = 24'd0;
 							join
@@ -46,7 +46,7 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 									if(memory[Address][15] == 1'b0)	//If MSB is zero
 										DataOut[31:16] = 16'd0;			//Sign extend with zeros.
 									else								//MSB was one.
-										DataOut[31:16] = 16'd0;			//Sign extedn with ones.
+										DataOut[31:16] = 16'b1111111111111111;			//Sign extedn with ones.
 								else	//Fill the rest of the bits with 0's
 									DataOut[31:16] = 16'd0;
 							join
@@ -64,7 +64,7 @@ module ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut
 							MOC = 1'b1;									//Indicate memory finished executing the task.
 						end
 
-				else if(ReadWrite == 1'b0)	//PERFORM WRITE OPERATION
+				else	//PERFORM WRITE OPERATION
 
 					if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
 						begin
