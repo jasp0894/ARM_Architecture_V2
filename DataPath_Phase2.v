@@ -10,7 +10,7 @@ module dp_phase1;
 
 	//reg[31:0] IR;
 
-	reg MOC,COND, CLK;
+	reg COND, CLK;
 	
 	reg[31:0] DATA_IN;
 
@@ -31,7 +31,7 @@ module dp_phase1;
 	wire[4:0] MI_OUT, MG_OUT,MD_OUT;
 	
 	wire CONDTESTER_OUT, Z, N, V, C, MH_OUT;
-	wire LSM_DETECT, LSM_END;
+	wire LSM_DETECT, LSM_END,MOC;
 	
 	wire[31:0] DATA_OUT;
 
@@ -77,7 +77,7 @@ module dp_phase1;
 	mux_2x1_32bit muxE(ME_OUT, CU_OUT[16], ALU_OUT, DATA_OUT);
 
 
-	lsm_manager lsm(CU_OUT[6], CU_OUT[5:3], IR_Q, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
+	lsm_manager lsm(CU_OUT[6], CU_OUT[5:3], DATA_OUT, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
 
 	mux_4x1_5bit muxD(MD_OUT,CU_OUT[18:17],CU_OUT[15:11],{1'b0,IR_Q[24:21]}, MG_OUT,MI_OUT);
 	mux_2x1_5bit muxI(MI_OUT, IR_Q[23], 5'b10001, 5'b10011);
@@ -86,6 +86,9 @@ module dp_phase1;
 	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK);
 	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK);
 	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK);
+
+	//  MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut
+	ram256x8 ram(CU_OUT[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
 
 
 
@@ -100,7 +103,7 @@ module dp_phase1;
 
 
 
-			MOC=1'd0; COND=1'd0; CLK=1'd0; 		
+			 COND=1'd0; CLK=1'd0; 		
 
 
 
@@ -141,9 +144,9 @@ module dp_phase1;
 
 		
 
-			$display("CU\t  Rn CondT Rd MA MC\t     PA\t\t PB\t   SHIFT MB_S      ALU  FR  CZVN MH MF ME      MD      MI     MG     MB      IR         MDR    MAR                      Time"); 
+			$display("CU\t  Rn CondT Rd MA MC\t     PA\t\t PB\t   SHIFT MB_S      ALU  FR  CZVN MH MF ME      MD      MI     MG     MB      IR         MDR    MAR    R/W  DATAOUT             Time"); 
 
-			$monitor("%h %d  %d   %d  %d  %d  %d  %d  %d  %d %d %b %b %b  %d %h %b  %b  %b %h %h %h %h %d",CU_OUT,IR_Q[19:16],CONDTESTER_OUT,IR_Q[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS,MH_OUT,MF_OUT,ME_OUT,MD_OUT,MI_OUT,MG_OUT,MB_OUT,IR_Q,MDR_Q,MAR_Q,$time); 
+			$monitor("%h %d  %d   %d  %d  %d  %d  %d  %d  %d %d %b %b %b  %d %h %b  %b  %b %h %h %h %h %b %h%d",CU_OUT,IR_Q[19:16],CONDTESTER_OUT,IR_Q[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS,MH_OUT,MF_OUT,ME_OUT,MD_OUT,MI_OUT,MG_OUT,MB_OUT,IR_Q,MDR_Q,MAR_Q,MH_OUT,DATA_OUT,$time); 
 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 
