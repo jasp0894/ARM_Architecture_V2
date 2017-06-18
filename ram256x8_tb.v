@@ -22,6 +22,13 @@ module ram256x8_tb;
 	//Simulation parameters
 	parameter sim_time = 70;
 
+	parameter BYTE = 3'b000; //byte w/o sign extension
+	parameter HALFWORD = 3'b001; //halfword w/o sign extension
+	parameter WORD = 3'b010; //byte w/o sign extension
+	parameter BYTEe = 3'b100; //byte w sign extension
+	parameter HALFWORDe = 3'b101; //halfword w sign extension
+	parameter WORDe = 3'b110; //word w sign extension
+
 	//Call the memory module
 	ram256x8 ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);	
 
@@ -38,7 +45,7 @@ module ram256x8_tb;
 			while (!$feof(fi)) 
 				begin					//Keep the file open until you reach its end.
 					code = $fscanf(fi, "%b", data); 		//Read a line of the input file and store it in the dummy variable.
-					ram256x8.ram256x8_c.memory[Address] = data;			//Store in the given Address of "memory" the data in the dummy variable.
+					ram256x8.ram256x8_cREC.memory[Address] = data;			//Store in the given Address of "memory" the data in the dummy variable.
 					Address = Address + 1;					//Point to the next Address in order to continue pre-charge.
 				end
 			$fclose(fi);									//Close the input file.
@@ -72,21 +79,21 @@ module ram256x8_tb;
 						5'd0: //Reading a byte
 							begin
 								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b000;					//Select the data size
+								MS_2_0 = BYTE;					//Select the data size
 								ReadWrite = 1'b1;					//Perform read operation.
 								CPUstate = 2'b01;
 							end
 						5'd1: //Reading a half-word
 							begin
 								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b001;					//Select the data size.
+								MS_2_0 = HALFWORD;					//Select the data size.
 								ReadWrite = 1'b1;					//Perform read operation.
 								CPUstate = 2'b01;
 							end
 						5'd2: //Reading a word
 							begin
 								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b010;					//Select the data size.
+								MS_2_0 = WORD;					//Select the data size.
 								ReadWrite = 1'b1;
 								CPUstate = 2'b01;
 							end
@@ -96,7 +103,7 @@ module ram256x8_tb;
 						5'd3: //Writing a byte
 							begin
 								Address = 32'd3;							//Select memory location.
-								MS_2_0 = 3'b000;							//Select the data size
+								MS_2_0 = BYTE;							//Select the data size
 								DataIn = 32'b10101010;						//Data to be written
 								ReadWrite = 1'b0;
 								CPUstate = 2'b01;
@@ -104,7 +111,7 @@ module ram256x8_tb;
 						5'd4: //Writing a half-word
 							begin
 								Address = 32'd30;							//Select memory location.
-								MS_2_0 = 3'b001;							//Select the data size
+								MS_2_0 = HALFWORD;							//Select the data size
 								DataIn = 32'b1000000110000001;			//Data to be written
 								ReadWrite = 1'b0;							//Perform write operation.
 								CPUstate = 2'b01;
@@ -112,7 +119,7 @@ module ram256x8_tb;
 						5'd5: //Writing a word
 							begin
 								Address = 32'd26;							//Select memory location.
-								MS_2_0 = 3'b010;							//Select the data size
+								MS_2_0 = WORD;							//Select the data size
 								DataIn = 32'b11000000000000000000000000000001;			//Data to be written
 								ReadWrite = 1'b0;
 								CPUstate = 2'b01;
@@ -122,22 +129,22 @@ module ram256x8_tb;
 
 						5'd6: //Reading a byte
 							begin
-								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b000;					//Select the data size
+								Address = 32'd3;					//Select memory location.
+								MS_2_0 = BYTE;					//Select the data size
 								ReadWrite = 1'b1;					//Perform read operation.
 								CPUstate = 2'b01;
 							end
 						5'd7: //Reading a half-word
 							begin
-								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b001;					//Select the data size.
+								Address = 32'd30;					//Select memory location.
+								MS_2_0 = HALFWORDe;					//Select the data size.
 								ReadWrite = 1'b1;					//Perform read operation.
 								CPUstate = 2'b01;
 							end
 						5'd8: //Reading a word
 							begin
-								Address = 32'd0;					//Select memory location.
-								MS_2_0 = 3'b010;					//Select the data size.
+								Address = 32'd26;					//Select memory location.
+								MS_2_0 = WORD;					//Select the data size.
 								ReadWrite = 1'b1;
 								CPUstate = 2'b01;
 							end
@@ -168,7 +175,7 @@ initial #sim_time $finish;
 initial
 	begin
 		$display("MOV 	MOC 	CLK CaseCounter CPUstate DataOut	TIME");
-		$monitor("%b 	%b 	%b     %d         %d  %b %d",MOV, MOC, CLK, CaseCounter, CPUstate, ram256x8.ram256x8_c.DataOut, $time);
+		$monitor("%b 	%b 	%b     %d         %d  %b %d",MOV, MOC, CLK, CaseCounter, CPUstate, ram256x8.ram256x8_cREC.DataOut, $time);
 	end
 
 always @(MOC)

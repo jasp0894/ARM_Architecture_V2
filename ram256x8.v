@@ -16,7 +16,7 @@ module ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);
 	wire MOCoff;
 	
 	//Ram Implementation
-	ram256x8_c ram256x8_c (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut);
+	ram256x8_cREC ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut);
 	ram256x8_s ram256x8_s (CLK, MOC, MOCoff);
 
 endmodule // ram256x8
