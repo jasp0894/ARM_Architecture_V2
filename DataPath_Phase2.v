@@ -10,10 +10,11 @@ module dp_phase2;
 
 	//reg[31:0] IR;
 	integer fi,code;
-	reg  CLK;
+	reg  CLK, RESET;
 	reg[31:0] Address;
 	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
 	reg[31:0] DATA_IN;
+
 
 
 
@@ -53,7 +54,7 @@ module dp_phase2;
 
 	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK);
 
-	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
+	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
 
 	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], MD_OUT);
 
@@ -112,7 +113,7 @@ module dp_phase2;
 
 
 			 //COND=1'd0;
-			 CLK=1'd0; 		
+			  		
 
 
 			 //Memory Pre-Charge
@@ -129,31 +130,18 @@ module dp_phase2;
 																//Pre-charge ends
 
 		   	
-		    //DA = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
-		    
-
-
-		   // #200;
-
-		    DATA_IN = 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
-		    #200;
-
+		     //DA = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
+		    // #200;
+		    // DATA_IN = 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
+		    // #200;
 			//DATA_IN = 32'b11100000100110100001000000101100;		//State 10
-
 			//#20;
-
 			/*
-
 			IR =  32'b11110010100110100001000000101100; 		//state 11
-
 			#200;
-
 			IR= 32'b11110001001110100001000000101100;		//state 14
-
 			#200;
-
 			IR=  32'b11110011000110100001000000101100;			//state 15
-
 			#20;*/
 
 		end
@@ -208,9 +196,28 @@ module dp_phase2;
 
 
 
+	// Cambiar el Clock
+
+	/*
+	CLK=1'd0;
+	always #2 CLK = ~CLK;
+	*/
+
+	initial 
+	begin
+		CLK = 1'b0;
+		repeat (1000)
+		#2 CLK = ~CLK;
+	end
+
+	initial
+		fork
+			RESET = 0;
+			#6 RESET = 1;
+		join
 
 
-	always #20 CLK = ~CLK;
+
 
 	initial #sim_time $finish;
 
