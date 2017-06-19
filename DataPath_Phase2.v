@@ -2,7 +2,7 @@
 
 
 
-module dp_phase1;
+module dp_phase2;
 
 
 
@@ -31,7 +31,7 @@ module dp_phase1;
 
 	wire[4:0] MI_OUT, MG_OUT,MD_OUT;
 	
-	wire CONDTESTER_OUT, Z, N, V, C, MH_OUT;
+	wire CONDTESTER_OUT, Z, N, V, C, MH_OUT, MJ_OUT;
 	wire LSM_DETECT, LSM_END,MOC;
 	
 	wire[31:0] DATA_OUT;
@@ -45,17 +45,17 @@ module dp_phase1;
 
 
 
-	parameter sim_time = 10000;
+	parameter sim_time = 1600;
 
 
 
 	//modules instantiation
 
-	flagRegister FR(FR_Q,FLAGS,CU_OUT[33],CLK);
+	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK);
 
 	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
 
-	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], {1'b0,IR_Q[24:21]});
+	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], MD_OUT);
 
 	CondTester conditionTester (CONDTESTER_OUT,IR_Q[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
 
@@ -80,6 +80,8 @@ module dp_phase1;
 
 
 	lsm_manager lsm(CU_OUT[6], CU_OUT[5:3], IR_Q, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
+
+	mux_2x1_1bit muxJ(MJ_OUT,CU_OUT[33],1'b0,IR_Q[20]);
 
 	mux_4x1_5bit muxD(MD_OUT,CU_OUT[18:17],CU_OUT[15:11],{1'b0,IR_Q[24:21]}, MG_OUT,MI_OUT);
 
@@ -156,17 +158,45 @@ module dp_phase1;
 
 		end
 
-
-
 	initial
+		begin
+			$display("CU\t 	STATE#		CR15-CR8 CR7-CR0   R/W MEM_IN  MEM_OUT  CondT IR_OUT   Rd Rn     SHIFTER 	PA\t\t PB\t FR_Q 	  ALU_OUT CZVN MA 	 MB MC\t MD  	    ME MF MG MH MI MDR 		MAR PC"); 
+		end
+
+	always@(posedge CLK)
 
 		begin
 
-		
-
-			$display("CU\t  Rn CondT Rd MA MC\t     PA\t\t PB\t   SHIFT MB_S      ALU  FR  CZVN MH MF ME      MD      MI     MG     MB      IR         MDR    MAR    R/W  DATAOUT        Time"); 
-
-			$monitor("%h %d  %d   %d  %d  %d  %d  %d  %d  %d %d %b %b %b  %d %h %b  %b  %b %h %h %h %h %b %h%d",CU_OUT,IR_Q[19:16],CONDTESTER_OUT,IR_Q[15:12], MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,CU_OUT[24:22],ALU_OUT,FR_Q,FLAGS,MH_OUT,MF_OUT,ME_OUT,MD_OUT,MI_OUT,MG_OUT,MB_OUT,IR_Q,MDR_Q,MAR_Q,MH_OUT,DATA_OUT,$time); 
+			$monitor("%b  %d  %d  %d      %b %h %h   %b %h %d %d %d %d %d 	 %b %d %b %d %d %d   %d %d %d %d %d  %d %h %h %d",
+					CU_OUT,
+					cu1.muxA.Y,
+					cu1.CTL_REG_OUT[49:42],
+					cu1.CTL_REG_OUT[41:34],
+					MH_OUT,
+					MDR_Q,
+					DATA_OUT,
+					CONDTESTER_OUT,
+					IR_Q,
+					IR_Q[15:12],
+					IR_Q[19:16],
+					SHIFTER_OUT,
+					PA,
+					PB,
+					FR_Q,
+					ALU_OUT,
+					FLAGS,
+					MA_OUT,
+					MB_OUT,
+					MC_OUT,
+					MD_OUT,
+					ME_OUT,
+					MF_OUT,
+					MG_OUT,
+					MH_OUT,
+					MI_OUT,
+					MDR_Q,
+					MAR_Q,
+					RF.QS15); 
 
 			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 
