@@ -46,7 +46,7 @@ module dp_phase2;
 
 
 
-	parameter sim_time = 1600;
+	parameter sim_time = 1000;
 
 
 
@@ -157,7 +157,7 @@ module dp_phase2;
 
 			$monitor("%b  %d  %d  %d      %b %h %h   %b %h %d %d %d %d %d 	 %b %d %b %d %d %d   %d %d %d %d %d  %d %h %h %d",
 					CU_OUT,
-					cu1.muxA.Y,
+					cu1.CTL_REG_OUT[63:58],
 					cu1.CTL_REG_OUT[49:42],
 					cu1.CTL_REG_OUT[41:34],
 					MH_OUT,
