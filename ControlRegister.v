@@ -16,7 +16,7 @@ else
 		if(ENABLE)
 			Q = D;
 		else
-			Q = 64'b0;
+			Q = Q;
 	end
 
 endmodule // D_Latch64bits

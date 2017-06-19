@@ -1,0 +1,6 @@
+Contents of memory location          0 are 00000000000000000000000011001100
+Contents of memory location          0 are 00000000000000001100110011111111
+Contents of memory location          0 are 11001100111111110011001100000000
+Contents of memory location          3 are 00000000000000000000000010101010
+Contents of memory location         30 are 11111111111111111000000110000001
+Contents of memory location         26 are 11000000000000000000000000000001
