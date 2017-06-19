@@ -148,14 +148,14 @@ module dp_phase2;
 
 	initial
 		begin
-			$display("CU\t 	STATE#		CR15-CR8 CR7-CR0   R/W MEM_IN  MEM_OUT  CondT IR_OUT   Rd Rn     SHIFTER 	PA\t\t PB\t FR_Q 	  ALU_OUT CZVN MA 	 MB MC\t MD  	    ME MF MG MH MI MDR 		MAR PC"); 
+			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d  %d  %d      %b %h %h   %b %h %d %d %d %d %d 	 %b %d %b %d %d %d   %d %d %d %d %d  %d %h %h %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d",
 					CU_OUT,
 					cu1.CTL_REG_OUT[63:58],
 					cu1.CTL_REG_OUT[49:42],
@@ -206,7 +206,7 @@ module dp_phase2;
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (1000)
+		repeat (100)
 		#2 CLK = ~CLK;
 	end
 
