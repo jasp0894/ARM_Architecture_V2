@@ -1,7 +1,7 @@
 //------------------Control Unit Test Module-----------------------
 module ControlUnit_Tester_pepo;
 	//input signals
-	reg[31:0] IR;
+	reg [31:0] IR;
 	reg MOC;
 	reg COND;
 	reg LSM_DETECT;
@@ -15,15 +15,14 @@ module ControlUnit_Tester_pepo;
 	parameter sim_time = 50000;
 
 	//module instantiation
-	cu_pepo cu_pepo (IR, MOC, COND, LSM_DETECT, LSM_END);
+	cu_pepo cu_pepo (IR, MOC, COND, LSM_DETECT, LSM_END, CLK, cu_datapath);
 
-	
 	initial
 		begin
 			//INPUTS initialization
 	
 			IR = 32'b11100101110101000101000000000100; //State 16
-			MOC=1'd0; COND=1'd0; MLS0=1'd0; MLS1=1'd0; CLK=1'd0;
+			MOC = 1'd0; COND=1'd0; MLS0=1'd0; MLS1=1'd0; CLK=1'd0;
 
 
 			#200;
