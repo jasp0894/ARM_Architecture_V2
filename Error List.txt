@@ -1,0 +1,4 @@
+1) El MAR no se esta cargando con el contenido del PC.
+2) El PC vuelve a ser cero luego de ser cargado una vez
+	--El ALU provee PC + 4
+	--Los MUX que manejan OP estan operando correctamente.
