@@ -1,0 +1,20 @@
+Situacion: Quiero tener lo ultimo del repositorio (Nube, No local) para editar sobre eso. 
+
+1) checkout master (double-click sobre master)
+2) pull (la rama local del master se pone up-to-date con el repositorio)
+3) checkout el branch deseado (digamos, xbranch)
+4) arrastrar el master sobre xbrach y seleccionar "merge master into xbranch"
+5) push para llevar esos cambios nuevos al repositorio de xbranch (no es estrictamente necesario)
+6) Ready! (asegurarse de haber checkout el branch antes de editar para evitar problemas)
+
+
+Situacion: ya edite y quiero que todos tengan los cambios
+
+1) commit a los cambios (stage changes...) [local]
+2) push a los cambios [repositorio]
+3) arrastrar xbranch sobre master y seleccionar "start a pull request..."
+	-Con esto vas a tratar de hacer merge de los cambios en xbranch al master. Al solicitar el
+	pull request, se tiene que aceptar en github y la pagina se encarga de verificar si hay conflictos 
+	y permite resolverlos. 
+4) confirmar el merge (y solucionar posibles conflictos) en github
+5) "lisssssssssto" -instructores colombianos
