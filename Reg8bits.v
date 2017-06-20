@@ -1,13 +1,11 @@
-module Reg8bits(output reg[7:0] Q, input [7:0] D, input ENABLE,CLK);
+module Reg8bits(output reg[7:0] Q, input [7:0] D, input ENABLE,CLK,RESET);
 
-reg reset=1'b1;
+//reg reset=1'b1;
 
 always @ (posedge CLK)
-if(reset)
-	begin
-		Q<=8'd0;		//output initialization
-		reset <= 1'b0; 	//turn off reset state
-	end
+
+if(RESET)
+	Q<= 8'd0;
 else
  	begin
 

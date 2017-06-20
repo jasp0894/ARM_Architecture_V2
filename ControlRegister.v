@@ -1,4 +1,4 @@
-module ControlRegister(output reg[63:0] Q, input [63:0] D, input ENABLE,CLK);
+module ControlRegister(output reg[63:0] Q, input [63:0] D, input ENABLE,CLK,RESET);
 
 //Output initialization
 
@@ -6,13 +6,16 @@ module ControlRegister(output reg[63:0] Q, input [63:0] D, input ENABLE,CLK);
 
 always @ (posedge CLK)
 
-	begin
+	if(RESET)
+		Q <= 64'd0;
+	else
+		begin
 
-		if(ENABLE)
-			Q <= D;
-		else
-			Q <= Q;
-	end
+			if(ENABLE)
+				Q <= D;
+			else
+				Q <= Q;
+		end
 
 
 

@@ -29,12 +29,12 @@ module controlUnit_p(output reg [33:0] CU, input [31:0] IR, input MOC, COND, LSM
 
 			rom ROM(ROM_OUT,MR_OUT);
 
-			ControlRegister ctl_register(CTL_REG_OUT, ROM_OUT,1'd1,CLK);
+			ControlRegister ctl_register(CTL_REG_OUT, ROM_OUT,1'd1,CLK,RESET);
 
 
 			AdderCU adder (ADD_OUT,ADDER_COUT,MA_OUT,8'd1,1'd0);
 
-		    Reg8bits incrementerRegister(INC_REG_OUT,ADD_OUT,1'd1,CLK);
+		    Reg8bits incrementerRegister(INC_REG_OUT,ADD_OUT,1'd1,CLK,RESET);
 
 
 		    mux_2x1_8bit muxE(ME,CTL_REG_OUT[53],INC_REG_OUT,CTL_REG_OUT[49:42]);
@@ -51,7 +51,7 @@ module controlUnit_p(output reg [33:0] CU, input [31:0] IR, input MOC, COND, LSM
 
 			// Sugerencia del profesor
 			// Reset es un bit controlado por uno
-			mux_2x1_8bit muxR(MR_OUT,RESET,8'd0,MA_OUT); 
+			mux_2x1_8bit muxR(MR_OUT,RESET,MA_OUT,8'd0); 
 
 		always @ (CLK)
 
