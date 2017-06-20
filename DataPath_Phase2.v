@@ -52,7 +52,7 @@ module dp_phase2;
 
 	//modules instantiation
 
-	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK);
+	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK,RESET);
 
 	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
 
@@ -90,11 +90,11 @@ module dp_phase2;
 
 	mux_2x1_5bit muxG(MG_OUT, IR_Q[23], 5'b10110, 5'b10101);
 
-	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK);
+	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK,RESET);
 
-	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK);
+	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK,RESET);
 
-	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK);
+	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK,RESET);
 
 	//  MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut
 	ram256x8 ram256x8 (CU_OUT[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
@@ -206,14 +206,14 @@ module dp_phase2;
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (100)
+		repeat (1000)
 		#2 CLK = ~CLK;
 	end
 
 	initial
 		fork
-			RESET = 0;
-			#6 RESET = 1;
+			RESET = 1;
+			#6 RESET = 0;
 		join
 
 
