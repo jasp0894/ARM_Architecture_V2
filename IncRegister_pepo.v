@@ -1,4 +1,4 @@
-module IncRegister_pepo (D, Enable, CLK, Q);
+module IncRegister_pepo (D, Enable, RESET, CLK, Q);
 
 	//Description
 		//Register placed at the output of the control unit adder to maintain the adder's value.
@@ -6,15 +6,19 @@ module IncRegister_pepo (D, Enable, CLK, Q);
 	//Inputs
 	input wire [7:0] D;		//Input data to the register
 	input wire Enable;		//Signals the register to latch or not
+	input wire RESET;
 	input wire CLK;
 
 	//Outputs
 	output reg [7:0] Q;		//Output data of the register.
 
 	//Implementation
-	always @ (posedge CLK)
-		if(Enable)
-			Q = D;
+	always @ (posedge CLK, RESET)
+		if(RESET)
+			Q = 8'd0;
+		else
+			if(Enable)
+				Q = D;
 endmodule // IncRegister
 
 /*
