@@ -24,7 +24,7 @@ module dp_phase2;
 
 	wire[31:0]  PA, PB, ALU_OUT, IR_Q, MAR_Q, MDR_Q, SHIFTER_OUT, MB_OUT, ME_OUT;
 
-	wire [33:0] CU_OUT;
+	wire [33:0] CU_OUT_DP,CU_OUT_CU;
 
 	wire[3:0] FR_Q, MC_OUT, MA_OUT , FLAGS, LSM_COUNTER;
 	
@@ -54,8 +54,9 @@ module dp_phase2;
 
 	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK,RESET);
 
-	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
+	//controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
 
+	cu_pepo cu(IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,CU_OUT)
 	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], MD_OUT);
 
 	CondTester conditionTester (CONDTESTER_OUT,IR_Q[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
