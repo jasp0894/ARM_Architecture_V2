@@ -54,51 +54,52 @@ module dp_phase2;
 
 	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK,RESET);
 
-	//controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
+	//controlUnit_p cu1(CU_OUT_DP,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
 
-	cu_pepo cu(IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,CU_OUT)
+	cu_pepo cu1 (IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,RESET,CLK,CU_OUT_DP);
+
 	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], MD_OUT);
 
 	CondTester conditionTester (CONDTESTER_OUT,IR_Q[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
 
-	mux_4x1_4bit muxA (MA_OUT,CU_OUT[26:25],IR_Q[19:16], 4'b1111, LSM_COUNTER, IR_Q[15:12]);
+	mux_4x1_4bit muxA (MA_OUT,CU_OUT_DP[26:25],IR_Q[19:16], 4'b1111, LSM_COUNTER, IR_Q[15:12]);
 
-	mux_8x1_4bit muxC (MC_OUT,CU_OUT[21:19],IR_Q[19:16], 4'b1111, 4'b1110, IR_Q[15:12], LSM_COUNTER, 4'd0, 4'd0, 4'd0);
+	mux_8x1_4bit muxC (MC_OUT,CU_OUT_DP[21:19],IR_Q[19:16], 4'b1111, 4'b1110, IR_Q[15:12], LSM_COUNTER, 4'd0, 4'd0, 4'd0);
 
-	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT[32],MA_OUT,IR_Q[3:0],MC_OUT);
+	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT_DP[32],MA_OUT,IR_Q[3:0],MC_OUT);
 
-	mux_8x1_32bit muxB (MB_OUT,CU_OUT[24:22],PB, SHIFTER_OUT, MDR_Q, MAR_Q, 32'd0, 32'd0, 32'd0, 32'd0);
+	mux_8x1_32bit muxB (MB_OUT,CU_OUT_DP[24:22],PB, SHIFTER_OUT, MDR_Q, MAR_Q, 32'd0, 32'd0, 32'd0, 32'd0);
 
 	shifter SHIFTER (SHIFTER_OUT,FLAGS[3],PB,IR_Q,FR_Q[3],1'd1);
 	//*******************************************************************************************************
 	
-	mux_4x1_1bit muxH(MH_OUT,CU_OUT[2:1],CU_OUT[28],1'b0,IR_Q[20],1'b0);	// falta B = SLS_R/W
+	mux_4x1_1bit muxH(MH_OUT,CU_OUT_DP[2:1],CU_OUT_DP[28],1'b0,IR_Q[20],1'b0);	// falta B = SLS_R/W
 
-	mux_2x1_3bit muxF(MF_OUT, CU_OUT[0], CU_OUT[9:7],SLS_OUT);
+	mux_2x1_3bit muxF(MF_OUT, CU_OUT_DP[0], CU_OUT_DP[9:7],SLS_OUT);
 
-	SLSManager sls(SLS_OUT,IR_Q,CU_OUT[10]);
+	SLSManager sls(SLS_OUT,IR_Q,CU_OUT_DP[10]);
 
-	mux_2x1_32bit muxE(ME_OUT, CU_OUT[16], ALU_OUT, DATA_OUT);
+	mux_2x1_32bit muxE(ME_OUT, CU_OUT_DP[16], ALU_OUT, DATA_OUT);
 
 
-	lsm_manager lsm(CU_OUT[6], CU_OUT[5:3], IR_Q, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
+	lsm_manager lsm(CU_OUT_DP[6], CU_OUT_DP[5:3], IR_Q, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
 
-	mux_2x1_1bit muxJ(MJ_OUT,CU_OUT[33],1'b0,IR_Q[20]);
+	mux_2x1_1bit muxJ(MJ_OUT,CU_OUT_DP[33],1'b0,IR_Q[20]);
 
-	mux_4x1_5bit muxD(MD_OUT,CU_OUT[18:17],CU_OUT[15:11],{1'b0,IR_Q[24:21]}, MG_OUT,MI_OUT);
+	mux_4x1_5bit muxD(MD_OUT,CU_OUT_DP[18:17],CU_OUT_DP[15:11],{1'b0,IR_Q[24:21]}, MG_OUT,MI_OUT);
 
 	mux_2x1_5bit muxI(MI_OUT, IR_Q[23], 5'b10001, 5'b10011);
 
 	mux_2x1_5bit muxG(MG_OUT, IR_Q[23], 5'b10110, 5'b10101);
 
-	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK,RESET);
+	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT_DP[31], CLK,RESET);
 
-	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK,RESET);
+	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT_DP[29], CLK,RESET);
 
-	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK,RESET);
+	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT_DP[30], CLK,RESET);
 
 	//  MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut
-	ram256x8 ram256x8 (CU_OUT[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
+	ram256x8 ram256x8 (CU_OUT_DP[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
 
 
 
@@ -157,10 +158,10 @@ module dp_phase2;
 		begin
 
 			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d",
-					CU_OUT,
-					cu1.CTL_REG_OUT[63:58],
-					cu1.CTL_REG_OUT[49:42],
-					cu1.CTL_REG_OUT[41:34],
+					CU_OUT_DP,
+					cu1.CTL_REG_CUI[29:24], 
+					cu1.CTL_REG_CUI[15:8], 
+					cu1.CTL_REG_CUI[7:0],
 					MH_OUT,
 					MDR_Q,
 					DATA_OUT,
@@ -187,7 +188,7 @@ module dp_phase2;
 					MAR_Q,
 					RF.QS15); 
 
-			//$monitor("%b   %d ",CU_OUT,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
+			//$monitor("%b   %d ",CU_OUT_DP,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 
 		//
 
@@ -207,7 +208,7 @@ module dp_phase2;
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (1000)
+		repeat (1000000000)
 		#2 CLK = ~CLK;
 	end
 
