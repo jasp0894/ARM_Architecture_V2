@@ -150,14 +150,14 @@ module dp_phase2;
 
 	initial
 		begin
-			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC"); 
+			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC\tMOV"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d\t%b",
 					CU_OUT_DP,
 					cu1.CTL_REG_CUI[29:24], 
 					cu1.CTL_REG_CUI[15:8], 
@@ -186,7 +186,7 @@ module dp_phase2;
 					MI_OUT,
 					MDR_Q,
 					MAR_Q,
-					RF.QS15); 
+					RF.QS15,CU_OUT_DP[27]); 
 
 			//$monitor("%b   %d ",CU_OUT_DP,/*MA_OUT,MC_OUT,PA,PB,SHIFTER_OUT,MB_OUT,ALU_OUT,Z,C,N,V,*/ $time); 
 
@@ -196,19 +196,16 @@ module dp_phase2;
 
 		end
 
-
-
-	// Cambiar el Clock
-
 	/*
 	CLK=1'd0;
 	always #2 CLK = ~CLK;
 	*/
 
+	// Clock del sistema
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (1000000000)
+		repeat (1000)
 		#2 CLK = ~CLK;
 	end
 
