@@ -36,7 +36,8 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 
 	mux_2x1_8bit muxRc (MR_OUT, RESET, MA_OUT, 8'd0);
 
-	rom_64bits_pepo rom_64bits_pepo (ROM_OUT, MR_OUT);	//--
+	//rom_64bits_pepo rom_64bits_pepo (ROM_OUT, MR_OUT);	//--
+	rom ROM (ROM_OUT,MR_OUT);
 
 	ControlRegister_pepo ControlRegister_pepo (ROM_OUT, 1'd1, CLK, CTL_REG_CUI, cu_datapath);	//--
 
