@@ -1,1 +1,1 @@
-iverilog -o cu_pepo cu_pepo.v Encoder.v mux_4x1_8bit.v rom_64bits_pepo.v ControlRegister_pepo.v AdderCU.v IncRegister_pepo.v mux_2x1_8bit.v mux_8x1_1bit.v InverterCU.v NextStateAdd.v
+iverilog -o ControlUnit_Tester_pepo ControlUnit_Tester_pepo.v cu_pepo.v Encoder.v mux_4x1_8bit.v rom_64bits_pepo.v ControlRegister_pepo.v AdderCU.v IncRegister_pepo.v mux_2x1_8bit.v mux_8x1_1bit.v InverterCU.v NextStateAdd.v

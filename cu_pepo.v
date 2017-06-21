@@ -1,4 +1,4 @@
-module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, CLK, cu_datapath);
+module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 
 	//Inputs
 	input wire [31:0] IR;		//Output of IR contents supplied to the cu.
@@ -7,6 +7,7 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, CLK, cu_datapath);
 	input wire LSM_DETECT;		//Output of LSM_manager indicating for LSM instructions that a register was detected in the instruction register list.
 	input wire LSM_END;			//Output of LSM_manager indiccating that the LSM instruction management process ended.
 	input wire CLK;
+	input wire RESET;
 
 	//Outputs
 	output wire [33:0] cu_datapath;	//All the signals that the cu uses to control the datapath.
@@ -19,8 +20,9 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, CLK, cu_datapath);
 			   INC_REG_OUT,
 			   ME_OUT,
 			   MA_OUT, 
-			   ENC_OUT;
-	wire [63:0] ROM_OUT;
+			   ENC_OUT,
+			   MR_OUT;
+	wire [63:0] ROM_OUT; 
 	wire [29:0] CTL_REG_CUI;	//Internal signals of the control register for the control unit.
 
 	//Reference
@@ -32,13 +34,15 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, CLK, cu_datapath);
 
 	mux_4x1_8bit muxAc (MA_OUT,M1M0,ENC_OUT,8'd0,CTL_REG_CUI[7:0]/*CR7-CR0*/,ME_OUT);	//--
 
-	rom_64bits_pepo rom_64bits_pepo (ROM_OUT,MA_OUT);	//--
+	mux_2x1_8bit muxRc (MR_OUT, RESET, MA_OUT, 8'd0);
+
+	rom_64bits_pepo rom_64bits_pepo (ROM_OUT, MR_OUT);	//--
 
 	ControlRegister_pepo ControlRegister_pepo (ROM_OUT, 1'd1, CLK, CTL_REG_CUI, cu_datapath);	//--
 
 	AdderCU AdderCU (ADD_OUT,ADDER_COUT,MA_OUT,8'd1,1'd0);	//--
 
-	IncRegister_pepo IncRegister_pepo (ADD_OUT,1'd1,CLK,INC_REG_OUT);	//--
+	IncRegister_pepo IncRegister_pepo (ADD_OUT,1'd1, RESET, CLK,INC_REG_OUT);	//--
 
 	mux_2x1_8bit muxEc (ME_OUT,CTL_REG_CUI[19]/*MI*/,INC_REG_OUT,CTL_REG_CUI[15:8]/*CR15-CR8*/);	//--
 
