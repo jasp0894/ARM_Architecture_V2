@@ -10,10 +10,11 @@ module dp_phase2;
 
 	//reg[31:0] IR;
 	integer fi,code;
-	reg  CLK;
+	reg  CLK, RESET;
 	reg[31:0] Address;
 	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
 	reg[31:0] DATA_IN;
+
 
 
 
@@ -23,7 +24,7 @@ module dp_phase2;
 
 	wire[31:0]  PA, PB, ALU_OUT, IR_Q, MAR_Q, MDR_Q, SHIFTER_OUT, MB_OUT, ME_OUT;
 
-	wire [33:0] CU_OUT;
+	wire [33:0] CU_OUT_DP,CU_OUT_CU;
 
 	wire[3:0] FR_Q, MC_OUT, MA_OUT , FLAGS, LSM_COUNTER;
 	
@@ -45,16 +46,17 @@ module dp_phase2;
 
 
 
-	parameter sim_time = 1600;
+	parameter sim_time = 1000;
 
 
 
 	//modules instantiation
 
-	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK);
+	flagRegister FR(FR_Q,FLAGS,MJ_OUT,CLK,RESET);
 
-	controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK);
+	//controlUnit_p cu1(CU_OUT,IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,RESET);
 
+	cu_pepo cu(IR_Q,MOC,CONDTESTER_OUT,LSM_DETECT,LSM_END,CLK,CU_OUT)
 	ALU_V1 alu(ALU_OUT,FLAGS,MB_OUT,PA,FR_Q[3], MD_OUT);
 
 	CondTester conditionTester (CONDTESTER_OUT,IR_Q[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
@@ -89,11 +91,11 @@ module dp_phase2;
 
 	mux_2x1_5bit muxG(MG_OUT, IR_Q[23], 5'b10110, 5'b10101);
 
-	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK);
+	Reg32bits IR (IR_Q, DATA_OUT, CU_OUT[31], CLK,RESET);
 
-	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK);
+	Reg32bits MDR(MDR_Q, ME_OUT, CU_OUT[29], CLK,RESET);
 
-	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK);
+	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT[30], CLK,RESET);
 
 	//  MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut
 	ram256x8 ram256x8 (CU_OUT[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
@@ -112,7 +114,7 @@ module dp_phase2;
 
 
 			 //COND=1'd0;
-			 CLK=1'd0; 		
+			  		
 
 
 			 //Memory Pre-Charge
@@ -129,47 +131,34 @@ module dp_phase2;
 																//Pre-charge ends
 
 		   	
-		    //DA = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
-		    
-
-
-		   // #200;
-
-		    DATA_IN = 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
-		    #200;
-
+		     //DA = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
+		    // #200;
+		    // DATA_IN = 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
+		    // #200;
 			//DATA_IN = 32'b11100000100110100001000000101100;		//State 10
-
 			//#20;
-
 			/*
-
 			IR =  32'b11110010100110100001000000101100; 		//state 11
-
 			#200;
-
 			IR= 32'b11110001001110100001000000101100;		//state 14
-
 			#200;
-
 			IR=  32'b11110011000110100001000000101100;			//state 15
-
 			#20;*/
 
 		end
 
 	initial
 		begin
-			$display("CU\t 	STATE#		CR15-CR8 CR7-CR0   R/W MEM_IN  MEM_OUT  CondT IR_OUT   Rd Rn     SHIFTER 	PA\t\t PB\t FR_Q 	  ALU_OUT CZVN MA 	 MB MC\t MD  	    ME MF MG MH MI MDR 		MAR PC"); 
+			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d  %d  %d      %b %h %h   %b %h %d %d %d %d %d 	 %b %d %b %d %d %d   %d %d %d %d %d  %d %h %h %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d",
 					CU_OUT,
-					cu1.muxA.Y,
+					cu1.CTL_REG_OUT[63:58],
 					cu1.CTL_REG_OUT[49:42],
 					cu1.CTL_REG_OUT[41:34],
 					MH_OUT,
@@ -208,9 +197,28 @@ module dp_phase2;
 
 
 
+	// Cambiar el Clock
+
+	/*
+	CLK=1'd0;
+	always #2 CLK = ~CLK;
+	*/
+
+	initial 
+	begin
+		CLK = 1'b0;
+		repeat (1000)
+		#2 CLK = ~CLK;
+	end
+
+	initial
+		fork
+			RESET = 1;
+			#6 RESET = 0;
+		join
 
 
-	always #20 CLK = ~CLK;
+
 
 	initial #sim_time $finish;
 

@@ -1,6 +1,6 @@
 
 //---------------------ROM 2^8 cells of 64 bits----------------------
-module controlUnit(output [31:0] CU, input [31:0] IR, input MOC, COND, MLS0, MLS1, CLK);
+module controlUnit(output [31:0] CU, input [31:0] IR, input MOC, COND, MLS0, MLS1, CLK,RESET);
 	
 	
 	//63     62   61   60   59   58     57     56-54   53  52  51  50-48  47    46     45    44      43    42   41  40   39   38   37   36   35   34   33   32   31   30   29  28   27  26   25   24   23      22        21       20    19   18     17      16      15-8      7-0
@@ -12,7 +12,7 @@ module controlUnit(output [31:0] CU, input [31:0] IR, input MOC, COND, MLS0, MLS
 	wire[1:0] M1M0;
 	wire MC_OUT, INV_OUT, ADDER_COUT ;
 
-	wire[7:0] CR15_8, CR7_0,MD_OUT,ADD_OUT,INC_REG_OUT,ME, MA_OUT, ENC_OUT;
+	wire[7:0] CR15_8, CR7_0,MD_OUT,ADD_OUT,INC_REG_OUT,ME, MA_OUT, ENC_OUT,MR_OUT;
 
 	wire[63:0] CTL_REG_OUT,ROM_OUT;
 
@@ -41,11 +41,15 @@ module controlUnit(output [31:0] CU, input [31:0] IR, input MOC, COND, MLS0, MLS
 			mux_2x1 muxD(MD_OUT, CTL_REG_OUT[52],MA_OUT,CR7_0);
 	
 
-			rom ROM(ROM_OUT,MA_OUT);
+			rom ROM(ROM_OUT,MR_OUT);
 
 			ControlRegister ctl_register(CTL_REG_OUT, ROM_OUT,1'd1,CLK);
 
 			NextStateAdd nextState(M1M0, CTL_REG_OUT[56:54], INV_OUT);
+
+			// Sugerencia del profesor
+			// Reset es un bit controlado por uno
+			mux_2x1_8bit muxR(MR_OUT,RESET,8'd0,MA_OUT); 
 
 			
 
