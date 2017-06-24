@@ -1,5 +1,3 @@
-
-
 module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, DataOut);
 
 	//Inputs
@@ -57,7 +55,7 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 									else	//Fill the rest of the bits with 0's
 										DataOut[31:16] = 16'd0;
 								join
-								MOC = 1'b1;									//Indicate memory finished executing the task.
+								MOC <= 1'b1;									//Indicate memory finished executing the task.
 							end
 						else if(MS_2_0[1:0] == 2'b10)	//Word sized data.
 							begin	
@@ -69,7 +67,7 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 									DataOut[15:8] = memory[(MemAddress) + 2];	//Read 3rd byte on output bus.
 									DataOut[7:0] = memory[(MemAddress) + 3];	//Read 4th byte on output bus.	
 								join
-								MOC = 1'b1;									//Indicate memory finished executing the task.
+								MOC <= 1'b1;									//Indicate memory finished executing the task.
 							end
 						else
 							begin
@@ -90,7 +88,7 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 									memory[MemAddress] <= DataIn[15:8];		//Big endian convention.
 									memory[MemAddress + 1] <= DataIn[7:0];	//Read 2nd byte.
 								join
-								MOC = 1'b1;									//Indicate memory finished executing the task.
+								MOC <= 1'b1;									//Indicate memory finished executing the task.
 					  		end
 						else if(MS_2_0[1:0] == 2'b10)	//Word sized data.
 							begin
@@ -102,7 +100,7 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 									memory[MemAddress + 2] = DataIn[15:8];	//Read 3rd byte on output bus.
 									memory[MemAddress + 3] = DataIn[7:0];	//Read 4th byte on output bus.	
 								join
-								MOC = 1'b1;									//Indicate memory finished executing the task.
+								MOC <= 1'b1;									//Indicate memory finished executing the task.
 							end
 						else
 							begin
@@ -112,7 +110,7 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 			
 			//MOC Signal Turn Off
 			if(MOCoff)
-				MOC = 1'b0;	//Turn off MOC signal.
+				MOC <= 1'b0;	//Turn off MOC signal.
 
 		join
 	
