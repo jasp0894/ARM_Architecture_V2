@@ -24,12 +24,17 @@ module SLSManager (output reg[3:0] OUT, input[31:0] IR, input SLS_EN);
 		if(IR[27:25] == 3'b010 || IR[27:25] == 3'b011)
 
 		begin					
+
+
 			if(IR[22] == 1'b1)	//post-indexed
 
 				OUT= 4'b0000;					
+
 			else 
+
 				OUT = 4'b0010;  //unsigned word  (I don't know if  signed or unsigned. It's not clear from the documentation)
-		end	
+
+			end	
 
 
 	//Addressing mode 3 
@@ -44,24 +49,40 @@ module SLSManager (output reg[3:0] OUT, input[31:0] IR, input SLS_EN);
 
 		begin					
 
+
+
 			if(IR[20]==1'b1 && IR[5]==1'b0)	//LDRSB - Load Signed Byte 
 
 				OUT= 4'b0100;					
+
 			else if(IR[20]==1'b1 && IR[5]==1'b1)
 
 				OUT = 4'b0101;  //LDRSH - Load Signed Halfword 
-			else
-				OUT = 4'b0011;  //LDRD - Load Doubleword (don't know if signed of unsigned)
-		end	
 
-		if(IR[20] == 1'b1) //Load
+			else
+
+				OUT = 4'b0011;  //LDRD - Load Doubleword (don't know if signed of unsigned)
+
+				
+
+				
+
+			end	
+
+if(IR[20] == 1'b1) //Load
 
 			OUT[3] = 1'b1;  //Read
-		else
-            OUT[3] = 1'b0; //Write
+else
+               OUT[3] = 1'b0; //Write
 
 
 
-	end
+		end
 
-endmodule // Encoder SLSManager
+	
+
+
+
+
+
+endmodule //SLSManager

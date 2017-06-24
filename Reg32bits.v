@@ -1,6 +1,13 @@
-module Reg32bits(output reg[31:0] Q, input [31:0] D, input ENABLE,CLK,RESET);
+module Reg32bits (Q, D, ENABLE, CLK, RESET);
 
+//Inputs
+input wire [31:0] D;
+input wire ENABLE;
+input wire CLK;
+input wire RESET;
 
+//Outputs
+output reg [31:0] Q;
 
 always @ (posedge CLK)
 
