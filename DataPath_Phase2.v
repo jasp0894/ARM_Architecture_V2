@@ -26,9 +26,9 @@ module dp_phase2;
 
 	wire [33:0] CU_OUT_DP,CU_OUT_CU;
 
-	wire[3:0] FR_Q, MC_OUT, MA_OUT , FLAGS, LSM_COUNTER;
+	wire[3:0] FR_Q, MC_OUT, MA_OUT , FLAGS, LSM_COUNTER,SLS_OUT;
 	
-	wire[2:0] SLS_OUT, MF_OUT;
+	wire[2:0]  MF_OUT;
 
 	wire[4:0] MI_OUT, MG_OUT,MD_OUT;
 	
@@ -66,16 +66,16 @@ module dp_phase2;
 
 	mux_8x1_4bit muxC (MC_OUT,CU_OUT_DP[21:19],IR_Q[19:16], 4'b1111, 4'b1110, IR_Q[15:12], LSM_COUNTER, 4'd0, 4'd0, 4'd0);
 
-	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT_DP[32],MA_OUT,IR_Q[3:0],MC_OUT);
+	registerFile RF (PA,PB,ALU_OUT, CLK, CU_OUT_DP[32],MA_OUT,IR_Q[3:0],MC_OUT,RESET);
 
 	mux_8x1_32bit muxB (MB_OUT,CU_OUT_DP[24:22],PB, SHIFTER_OUT, MDR_Q, MAR_Q, 32'd0, 32'd0, 32'd0, 32'd0);
 
 	shifter SHIFTER (SHIFTER_OUT,FLAGS[3],PB,IR_Q,FR_Q[3],1'd1);
 	//*******************************************************************************************************
 	
-	mux_4x1_1bit muxH(MH_OUT,CU_OUT_DP[2:1],CU_OUT_DP[28],1'b0,IR_Q[20],1'b0);	// falta B = SLS_R/W
+	mux_4x1_1bit muxH(MH_OUT,CU_OUT_DP[2:1],CU_OUT_DP[28],SLS_OUT[3],IR_Q[20],1'b0);	
 
-	mux_2x1_3bit muxF(MF_OUT, CU_OUT_DP[0], CU_OUT_DP[9:7],SLS_OUT);
+	mux_2x1_3bit muxF(MF_OUT, CU_OUT_DP[0], CU_OUT_DP[9:7],SLS_OUT[2:0]);
 
 	SLSManager sls(SLS_OUT,IR_Q,CU_OUT_DP[10]);
 
@@ -150,14 +150,14 @@ module dp_phase2;
 
 	initial
 		begin
-			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC  MOV MOC  SLSOUT"); 
+			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t PB  FR_Q     ALU_OUT CZVN MA\t\tMB MC\tMD  	  ME MF MG MH MI  MDR 	  MAR      \tPC    MOV MOC  SLSOUT"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d\t%b %b   %b",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d%d%d%d   %b%d  %b %d  %d %d   %d %d %d %d %d  %d  %h %h%d\t%b %b   %b",
 					CU_OUT_DP,
 					cu1.CTL_REG_CUI[29:24], 
 					cu1.CTL_REG_CUI[15:8], 

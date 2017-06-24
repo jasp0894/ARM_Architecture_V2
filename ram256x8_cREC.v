@@ -38,7 +38,8 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 									else	//Fill the rest of the bits with 0's
 										DataOut[31:8] = 24'd0;
 								join
-								MOC <= 1'b1;	//Memory completed operation.
+								//MOC <= 1'b1;	//Memory completed operation.
+								MOC = 1'b1;																													//Gilissa
 							end
 						else if (MS_2_0[1:0] == 2'b01)	//Halfword sized data.
 							begin
@@ -78,7 +79,8 @@ module ram256x8_cREC (MOV, ReadWrite, MS_2_0, DataIn, Address, MOCoff, MOC, Data
 						if(MS_2_0[1:0] == 2'b00)	//Byte sized data.
 							begin
 								memory[MemAddress] <= DataIn[7:0]; 	//Place byte in output bus.
-								MOC <= 1'b1;							//Memory completed operation.
+								//MOC <= 1'b1;							//Memory completed operation.
+								MOC =1'b1;																													//Gilissa
 							end
 						else if(MS_2_0[1:0] == 2'b01)	//Halfword sized data.
 							begin	

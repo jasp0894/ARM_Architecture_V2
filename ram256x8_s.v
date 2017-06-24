@@ -16,7 +16,7 @@ module ram256x8_s (CLK, MOCin, MOCoff);
 	always@(posedge CLK)
 		if(MOCin)
 			if(MOCcounter == 1'b0)
-					MOCcounter <= ~MOCcounter;
+					 MOCcounter <= ~MOCcounter;						// Gilissa #4
 			else
 				MOCoff <= 1'b1;
 		else
