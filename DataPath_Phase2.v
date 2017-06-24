@@ -99,7 +99,7 @@ module dp_phase2;
 	Reg32bits MAR(MAR_Q, ALU_OUT, CU_OUT_DP[30], CLK,RESET);
 
 	//  MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut
-	ram256x8 ram256x8 (CU_OUT_DP[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT);
+	ram256x8 ram256x8 (CU_OUT_DP[27],MH_OUT,MF_OUT,MDR_Q,MAR_Q,CLK,MOC,DATA_OUT,RESET);
 
 
 
