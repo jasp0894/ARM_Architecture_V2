@@ -6,6 +6,7 @@ module ram256x8_s (CLK, RESET, MOCin, MOCoff);
 	//Inputs
 	input wire CLK;
 	input wire MOCin;
+	input wire RESET;
 
 	//Outputs
 	output reg MOCoff;
