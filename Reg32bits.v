@@ -9,7 +9,7 @@ input wire RESET;
 //Outputs
 output reg [31:0] Q;
 
-always @ (posedge CLK)
+always @ (posedge CLK, RESET)
 
 if(RESET)
 	Q<=32'd0;
