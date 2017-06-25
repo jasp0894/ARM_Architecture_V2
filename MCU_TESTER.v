@@ -1,19 +1,9 @@
-//Datapath Phase 1 Tester: DOES NOT include memory interface 
-
-
-
 module MCU_TESTER;
 
 
 
-//input signals
-
-	//reg[31:0] IR;
-	integer fi,code;
+	//DUT Input signals
 	reg  CLK, RESET;
-	reg[31:0] Address;
-	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
-	reg[31:0] DATA_IN;
 
 	//Internal Connections
 	wire [31:0] IR_OUT;
@@ -23,16 +13,14 @@ module MCU_TESTER;
 	wire LSM_END;
 	wire [33:0] cu_datapath;
 
+	//Simulation Controls
+	integer fi,code;
+	reg[31:0] Address;
+	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
 
-cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
-
-datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
-
-//63 62 61 60 59 58      57-55  54 53 52-50   49-42    41-34  33    32   31   30     29  28  27  26  25  24  23  22  21  20  19  18  17 16  15  14  13  12  11      10  9  8    7     6      5       4       3     2   1  0
-
-//                       N2-N0 INV MI S2-S0 CR15-CR8 CR7-CR0 FRLd RFLd IRLd MARLd MDRLd R/W MOV MA1 MA0 MB2 MB1 MB0 MC2 MC1 MC0 MD1 MD0 ME OP4 OP3 OP2 OP1 OP0 SLS_EN MS2 MS1 MS0 LSM_EN LSM_IN2 LSM_IN1 LSM_IN0 MH1 MH0 MF
-
-
+	//Call Modules
+	cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
+	datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
 
 	parameter sim_time = 1000;
 
@@ -123,7 +111,7 @@ datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MO
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (1000000000)
+		repeat (1000)
 		#2 CLK = ~CLK;
 	end
 
