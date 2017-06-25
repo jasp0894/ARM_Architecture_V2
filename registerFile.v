@@ -4,7 +4,7 @@ module registerFile(output [31:0] PA, PB, input [31:0] PC, input CLK,ENABLE, inp
 	wire[31:0] QS0,QS1,QS2,QS3,QS4,QS5,QS6,QS7,QS8,QS9,QS10,QS11,QS12,QS13,QS14,QS15;
 	wire PA,PB;
 
-	always @ (CLK,C,PC,B,A);
+	always @ (CLK,C,PC,B,A,ENABLE,RESET);
 
 
 	binaryDecoder binDecoder(E,C,ENABLE);
