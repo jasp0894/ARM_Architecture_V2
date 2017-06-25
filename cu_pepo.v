@@ -14,7 +14,7 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 
 	//Wires
 	wire [1:0] M1M0;
-	wire MC_OUT, INV_OUT, ADDER_COUT ;
+	wire MC_OUT,INV_OUT,ADDER_COUT ;
 	wire [7:0] MD_OUT,
 			   ADD_OUT,
 			   INC_REG_OUT,
