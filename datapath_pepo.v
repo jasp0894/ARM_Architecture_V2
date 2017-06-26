@@ -70,3 +70,5 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 		CondTester ConditionTester (CONDTESTER_OUT, IR_OUT[31:28], FR_OUT[3], FR_OUT[2], FR_OUT[1], FR_OUT[0]);
 
 endmodule // datapath_pepo
+
+// cu_datapath[32]

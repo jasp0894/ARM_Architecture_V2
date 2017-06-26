@@ -34,7 +34,9 @@ module datapath_pepo_tb;
 			#6 RESET = 0;
 			rom_counter = 6'd0;
 		join
-
+//////////////////////////////////////////////////////////////////////////////////////
+// 0100011010000010001000100100000000
+/////////////////////////////////////////////////////////////////////////////////////
 	always@(posedge CLK)
 		if(rom_counter < 6'd5)
 			begin
@@ -86,7 +88,7 @@ module datapath_pepo_tb;
 					6'd51: cu_datapath = 34'b0001000000000000001000000000000000;
 				endcase // rom_counter
 			
-				rom_counter <= rom_counter + 1;
+				rom_counter = rom_counter + 1;
 
 			end
 
@@ -96,13 +98,17 @@ module datapath_pepo_tb;
 		//Signal Monitoring
 		initial
 			begin
-				$display("RF_PA		rom_counter	 ALU_OUT	MC_OUT	MA_OUT	CLK");
+				$display("RF_PA\t rom_counter\t ALU_OUT\t\t MC_OUT\t MA_OUT\t R15_OUT\t CLK");
 			end
 		always @(posedge CLK)
 			begin
-				$monitor("%d 	%d		%d %d %d	%d",datapath_pepo.RF.PA, rom_counter, datapath_pepo.ALU_OUT, 
+				$monitor("%d\t %d\t %d\t\t %d\t %d\t %d\t %d",
+						datapath_pepo.RF.PA,
+						rom_counter,
+						datapath_pepo.ALU_OUT, 
 						datapath_pepo.MC_OUT,
 						datapath_pepo.MA_OUT,
+						datapath_pepo.RF.QS15,
 						CLK);
 			end
 
