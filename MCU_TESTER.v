@@ -22,7 +22,7 @@ module MCU_TESTER;
 	cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 	datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
 
-	parameter sim_time = 100;
+	parameter sim_time = 1000;
 
 
 	initial
