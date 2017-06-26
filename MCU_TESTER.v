@@ -22,7 +22,7 @@ module MCU_TESTER;
 	cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 	datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
 
-	parameter sim_time = 1000;
+	parameter sim_time = 100;
 
 
 	initial
@@ -38,24 +38,7 @@ module MCU_TESTER;
 					datapath.ram256x8.ram256x8_cREC.memory[Address] = data;			//Store in the given Address of "memory" the data in the dummy variable.
 					Address = Address + 1;					//Point to the next Address in order to continue pre-charge.
 				end
-			$fclose(fi);									//Close the input file.
-																//Pre-charge ends
-
-		   	
-		     //DA = 32'b11100001101110001000000000101100;	//MOV  Rd = R8 = 12
-		    // #200;
-		    // DATA_IN = 32'b11100000100111001000000000101100; //ADD Rd= R12; Rn=R8; shifterOp = 12
-		    // #200;
-			//DATA_IN = 32'b11100000100110100001000000101100;		//State 10
-			//#20;
-			/*
-			IR =  32'b11110010100110100001000000101100; 		//state 11
-			#200;
-			IR= 32'b11110001001110100001000000101100;		//state 14
-			#200;
-			IR=  32'b11110011000110100001000000101100;			//state 15
-			#20;*/
-
+			$fclose(fi);									//Close the input file.															//Pre-charge ends
 		end
 
 	initial
