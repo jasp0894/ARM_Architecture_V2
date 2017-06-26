@@ -1,4 +1,4 @@
-module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
+module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, CONDTESTER_OUT);
 
 	//Inputs
 	input wire [33:0] cu_datapath;
@@ -10,7 +10,7 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 	output wire LSM_DETECT;
 	output wire LSM_END;
 	output wire MOC;
-	output wire COND;
+	output wire CONDTESTER_OUT;
 
 	//Internal Connections
 	wire [3:0] MA_OUT;			//Mux A output
@@ -35,7 +35,6 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 	wire [3:0] FR_OUT;
 	wire [3:0] FLAGS;
 	wire [31:0] PA;				//Port A of the register file.
-	wire CONDTESTER_OUT;
 	
 	//Module Implementation
 		//Muxes
