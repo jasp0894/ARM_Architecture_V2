@@ -1,4 +1,4 @@
-module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
+module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, CONDTESTER_OUT);
 
 	//Inputs
 	input wire [33:0] cu_datapath;
@@ -10,7 +10,7 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 	output wire LSM_DETECT;
 	output wire LSM_END;
 	output wire MOC;
-	output wire COND;
+	output wire CONDTESTER_OUT;
 
 	//Internal Connections
 	wire [3:0] MA_OUT;			//Mux A output
@@ -32,7 +32,6 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 	wire MH_OUT;
 	wire MJ_OUT;
 	wire SLS_R_W;				//Read/Write signal from the SLS manager.
-	wire MOC;
 	wire [3:0] FR_OUT;
 	wire [3:0] FLAGS;
 	wire [31:0] PA;				//Port A of the register file.
@@ -51,7 +50,7 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 		mux_2x1_1bit muxJ (MJ_OUT, cu_datapath[33], 1'b0, IR_OUT[20]);
 
 		//Memory
-		ram256x8 ram256x8 (cu_datapath[27], MH_OUT, MF_OUT, MDR_OUT, MAR_OUT, CLK, MOC, MEM_OUT);
+		ram256x8 ram256x8 (cu_datapath[27], MH_OUT, MF_OUT, MDR_OUT, MAR_OUT, CLK, MOC, MEM_OUT, RESET);
 
 		//Registers
 		Reg32bits MAR (MAR_OUT, ALU_OUT, cu_datapath[30], CLK, RESET);
@@ -63,9 +62,12 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 		ALU_V1 ALU (ALU_OUT, FLAGS, MB_OUT, PA, FR_OUT[3], MD_OUT);
 
 		//Management Blocks
-		registerFile RF (PA, PB, ALU_OUT, CLK, cu_datapath[32], MA_OUT, IR_OUT[3:0], MC_OUT);
+		RegisterFile_pepo RF (PA, PB, ALU_OUT, CLK, cu_datapath[32], MA_OUT, IR_OUT[3:0], MC_OUT, RESET);
 		lsm_manager lsm_manager (cu_datapath[6], cu_datapath[5:3], IR_OUT, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
 		SLSManager SLSManager (SLS_OUT,IR_OUT,cu_datapath[10]);
 		shifter shifter (SHIFTER_OUT, FLAGS[3], PB, IR_OUT, FR_OUT[3], 1'b1 /*Wierd*/);	//Most ackard wiring.
-		CondTester ConditionTester (CONDTESTER_OUT,IR_Q[31:28],FR_Q[3],FR_Q[2],FR_Q[1],FR_Q[0]);
-		/* sdvnhsidohvfn9 8erisydfmuhvnsiymdfgvnscxm*/ //Check me
+		CondTester ConditionTester (CONDTESTER_OUT, IR_OUT[31:28], FR_OUT[3], FR_OUT[2], FR_OUT[1], FR_OUT[0]);
+
+endmodule // datapath_pepo
+
+// cu_datapath[32]

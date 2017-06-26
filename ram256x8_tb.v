@@ -13,11 +13,12 @@ module ram256x8_tb;
 	reg [2:0] MS_2_0;			//Allows selection of the data size and indicates if the data is signed?
 	reg [31:0] DataIn;			//Input bus of data of the RAM.
 	reg [31:0] Address;			//Indicates the memory location to be accessed.
+	reg RESET;
 	reg CLK;
 
 	//Outputs
-	output wire MOC;					//Indicates if memory operation finished.
-	output wire [31:0] DataOut;			//Output bus of the ram.
+	wire MOC;					//Indicates if memory operation finished.
+	wire [31:0] DataOut;			//Output bus of the ram.
 
 	//Simulation parameters
 	parameter sim_time = 70;
@@ -30,7 +31,7 @@ module ram256x8_tb;
 	parameter WORDe = 3'b110; //word w sign extension
 
 	//Call the memory module
-	ram256x8 ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut);	
+	ram256x8 ram256x8 (MOV, ReadWrite, MS_2_0, DataIn, Address, CLK, MOC, DataOut, RESET);	
 
 
 

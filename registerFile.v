@@ -1,3 +1,4 @@
+
 module registerFile(output [31:0] PA, PB, input [31:0] PC, input CLK,ENABLE, input [3:0]A,B,C, input RESET);
 
 	wire[0:15] E;
