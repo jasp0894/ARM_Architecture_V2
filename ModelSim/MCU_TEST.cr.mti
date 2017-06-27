@@ -1,0 +1,267 @@
+C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_2x1_1bit
+
+Top level modules:
+	mux_2x1_1bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_8x1_4bit
+
+Top level modules:
+	mux_8x1_4bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_4x1_8bit
+
+Top level modules:
+	mux_4x1_8bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/shifter.v {1 {vlog -work work -stats=none {C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\shifter.v}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module shifter
+
+Top level modules:
+	shifter
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_8x1_32bit
+
+Top level modules:
+	mux_8x1_32bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_4x1_1bit
+
+Top level modules:
+	mux_4x1_1bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_2x1_3bit
+
+Top level modules:
+	mux_2x1_3bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module SLSManager
+
+Top level modules:
+	SLSManager
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module lsm_manager
+
+Top level modules:
+	lsm_manager
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module BinaryDecoder_pepo
+
+Top level modules:
+	BinaryDecoder_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module CondTester
+
+Top level modules:
+	CondTester
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ram256x8_s
+
+Top level modules:
+	ram256x8_s
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_2x1_5bit
+
+Top level modules:
+	mux_2x1_5bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module Encoder
+
+Top level modules:
+	Encoder
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ram256x8_cREC
+
+Top level modules:
+	ram256x8_cREC
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_8x1_1bit
+
+Top level modules:
+	mux_8x1_1bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_4x1_5bit
+
+Top level modules:
+	mux_4x1_5bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/datapath_pepo.v {1 {vlog -work work -stats=none {C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\datapath_pepo.v}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module datapath_pepo
+
+Top level modules:
+	datapath_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ALU_V1
+
+Top level modules:
+	ALU_V1
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module MCU_TESTER
+
+Top level modules:
+	MCU_TESTER
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module cu_pepo
+
+Top level modules:
+	cu_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_16x1_32bit
+
+Top level modules:
+	mux_16x1_32bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module Reg32bits
+
+Top level modules:
+	Reg32bits
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ram256x8
+
+Top level modules:
+	ram256x8
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module Register_32bits_pepo
+
+Top level modules:
+	Register_32bits_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_2x1_32bit
+
+Top level modules:
+	mux_2x1_32bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module flagRegister
+
+Top level modules:
+	flagRegister
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module InverterCU
+
+Top level modules:
+	InverterCU
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module RegisterFile_pepo
+
+Top level modules:
+	RegisterFile_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_4x1_4bit
+
+Top level modules:
+	mux_4x1_4bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module lsm_manager_s
+
+Top level modules:
+	lsm_manager_s
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module lsm_manager_c
+
+Top level modules:
+	lsm_manager_c
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module AdderCU
+
+Top level modules:
+	AdderCU
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/rom_64bits.v {1 {vlog -work work -stats=none {C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\rom_64bits.v}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module rom
+
+Top level modules:
+	rom
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ControlRegister_pepo.v {1 {vlog -work work -stats=none {C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\ControlRegister_pepo.v}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ControlRegister_pepo
+
+Top level modules:
+	ControlRegister_pepo
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module NextStateAdd
+
+Top level modules:
+	NextStateAdd
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module mux_2x1_8bit
+
+Top level modules:
+	mux_2x1_8bit
+
+} {} {}} C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v {1 {vlog -work work -stats=none C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module IncRegister_pepo
+
+Top level modules:
+	IncRegister_pepo
+
+} {} {}}
