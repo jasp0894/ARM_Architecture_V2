@@ -16,7 +16,7 @@ module Register_32bits_pepo (Q, D, ENABLE, CLK, RESET);
 			Q <= 32'd0;
 		else
 			if(ENABLE)
-				Q <= #1 D;
+				Q <= D;
 			else
 				Q <= Q;	
 
