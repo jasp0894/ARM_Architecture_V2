@@ -121,7 +121,7 @@ module shifter (output reg[31:0] SHIFTER_OPERAND, output reg COUT, input [31:0] 
 				else
 					RegTemp = {8'h00,IR[23:0]};
 
-				SHIFTER_OPERAND = 4 + 4*RegTemp;	
+				SHIFTER_OPERAND = 32'd8 + 32'd4*RegTemp;	
 			end	
 
 		end
