@@ -10,7 +10,7 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 	input wire RESET;
 
 	//Outputs
-	output wire [33:0] cu_datapath;	//All the signals that the cu uses to control the datapath.
+	output wire [34:0] cu_datapath;	//All the signals that the cu uses to control the datapath.
 
 	//Wires
 	wire [1:0] M1M0;
@@ -22,12 +22,12 @@ module cu_pepo (IR, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 			   MA_OUT, 
 			   ENC_OUT,
 			   MR_OUT;
-	wire [63:0] ROM_OUT; 
+	wire [64:0] ROM_OUT; 
 	wire [29:0] CTL_REG_CUI;	//Internal signals of the control register for the control unit.
 
 	//Reference
-	//63 62 61 60 59 58  57-55  54 53 52-50   49-42    41-34  33    32   31   30     29  28  27  26  25  24  23  22  21  20  19  18  17 16  15  14  13  12  11      10  9  8    7     6      5       4       3     2   1  0
-//                       N2-N0 INV MI S2-S0 CR15-CR8 CR7-CR0  MJ   RFLd IRLd MARLd MDRLd R/W MOV MA1 MA0 MB2 MB1 MB0 MC2 MC1 MC0 MD1 MD0 ME OP4 OP3 OP2 OP1 OP0 SLS_EN MS2 MS1 MS0 LSM_EN LSM_IN2 LSM_IN1 LSM_IN0 MH1 MH0 MF
+	//65 64 63 62 61 59  58-56  55 54 53-51   50-43    42-35  34  33    32   31   30     29  28  27  26  25  24  23  22  21  20  19  18  17 16  15  14  13  12  11      10  9  8    7     6      5       4       3     2   1  0
+//                       N2-N0 INV MI S2-S0 CR15-CR8 CR7-CR0  MK  MJ   RFLd IRLd MARLd MDRLd R/W MOV MA1 MA0 MB2 MB1 MB0 MC2 MC1 MC0 MD1 MD0 ME OP4 OP3 OP2 OP1 OP0 SLS_EN MS2 MS1 MS0 LSM_EN LSM_IN2 LSM_IN1 LSM_IN0 MH1 MH0 MF
 //						23-21	20	19	18-16	15-8	7-0	CTL_REG_CUI
 	//Implementation
 	Encoder encoder (ENC_OUT,IR);	//--

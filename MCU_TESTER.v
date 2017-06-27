@@ -11,7 +11,7 @@ module MCU_TESTER;
 	wire COND;
 	wire LSM_DETECT;
 	wire LSM_END;
-	wire [33:0] cu_datapath;
+	wire [34:0] cu_datapath;
 
 	//Simulation Controls
 	integer fi,code;

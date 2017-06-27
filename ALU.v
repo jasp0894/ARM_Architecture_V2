@@ -298,14 +298,14 @@ reg [31:0] tempResult;
 	//--------------------------OP Instructions------------------------------
 	//---These instructions do not alter flags------------------------------
 	OP1:  R = B;			//moves B to the output
-	OP2:  R = B+4;			// B+4to the output
-	OP3:  R = A+B+4;			//A+B+4to the output
-	OP4:  R = B-4;
-	OP5:  R = A-4;
+	OP2:  R = B+32'd4;			// B+4to the output
+	OP3:  R = A+B+32'd4;			//A+B+4to the output
+	OP4:  R = B-32'd4;
+	OP5:  R = A-32'd4;
 	OP6:  R = A+B;
 	OP7:  R = B-A;
 	OP8:  R = A;
-	OP9:  R = A+4;
+	OP9:  R = A+32'd4;
 
 
 	endcase // OP
