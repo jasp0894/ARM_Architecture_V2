@@ -1,0 +1,824 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Modeltech_pe_edu_10.4a/examples
+vAdderCU
+Z0 !s110 1498573715
+!i10b 1
+!s100 4jmO=:=Q`dEN_iQ_1j0>S0
+INWJ313ALMOfM^GSFAhFUo3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/Pepo/Documents/ModelSim
+Z3 w1494881939
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v
+L0 4
+Z4 OP;L;10.4a;61
+r1
+!s85 0
+31
+Z5 !s108 1498573715.000000
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/AdderCU.v|
+!s101 -O0
+!i113 1
+Z6 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
+n@adder@c@u
+vALU_V1
+R0
+!i10b 1
+!s100 IN4k^ZNg2KK[1JY>^^VCz3
+IAN_nTfEPb0GdDP7OdA@P@2
+R1
+R2
+Z7 w1498573634
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v
+L0 9
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ALU.v|
+!s101 -O0
+!i113 1
+R6
+n@a@l@u_@v1
+vBinaryDecoder_pepo
+R0
+!i10b 1
+!s100 L7BVDc2J23QZ[n]Tg2Ea=0
+IXe=lmfza7e^5O7T_8c7Di0
+R1
+R2
+Z8 w1498463622
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/BinaryDecoder_pepo.v|
+!s101 -O0
+!i113 1
+R6
+n@binary@decoder_pepo
+vCondTester
+R0
+!i10b 1
+!s100 Kzg:cQTiQ=[FOV0BOTQF73
+IJbH74JZ8FWKD266VO:1V42
+R1
+R2
+Z9 w1497205847
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ConditionTester.v|
+!s101 -O0
+!i113 1
+R6
+n@cond@tester
+vControlRegister_pepo
+Z10 !s110 1498573716
+!i10b 1
+!s100 Jd_He3H65<zg?UfI6@?Q73
+IbjJ:cY=Eg;a4>5;5=1kHc3
+R1
+R2
+R7
+8C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\ControlRegister_pepo.v
+FC:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\ControlRegister_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+Z11 !s108 1498573716.000000
+!s107 C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\ControlRegister_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\ControlRegister_pepo.v|
+!s101 -O0
+!i113 1
+R6
+n@control@register_pepo
+vcu_pepo
+R10
+!i10b 1
+!s100 HXDa03Tb8G44>dMTSc11G0
+IN04[Pf3fNE^0VOiWk0bn<2
+R1
+R2
+R7
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/cu_pepo.v|
+!s101 -O0
+!i113 1
+R6
+vdatapath_pepo
+R10
+!i10b 1
+!s100 QIZ<;>Na^^^KfgGN7D1YN0
+I2:ddc>_>SmY=FVOSMbWG;0
+R1
+R2
+R7
+8C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\datapath_pepo.v
+FC:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\datapath_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\datapath_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\datapath_pepo.v|
+!s101 -O0
+!i113 1
+R6
+vEncoder
+R10
+!i10b 1
+!s100 BZe]@=aJU7?HfEOBELeC13
+ICl0H9TXb=4kDKeM>lJ94K1
+R1
+R2
+R9
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Encoder.v|
+!s101 -O0
+!i113 1
+R6
+n@encoder
+vflagRegister
+R10
+!i10b 1
+!s100 c;dEDIIlB`VA8]dFc]KUc2
+I7;nU8IfV;HzRVTNj7VCoE0
+R1
+R2
+Z12 w1498383888
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/FlagRegister.v|
+!s101 -O0
+!i113 1
+R6
+nflag@register
+vIncRegister_pepo
+R10
+!i10b 1
+!s100 3;f2Mn?Q=d4hcLU5UAY;c1
+I<H5FRICa2NOE[j:MY6S>i1
+R1
+R2
+w1498275382
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/IncRegister_pepo.v|
+!s101 -O0
+!i113 1
+R6
+n@inc@register_pepo
+vInverterCU
+R10
+!i10b 1
+!s100 1RILaXU>38YHoe9nm<DaD1
+ITgdF^LKF?l6iY`dA4^QSz3
+R1
+R2
+R3
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v
+L0 1
+R4
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/InverterCU.v|
+!s101 -O0
+!i113 1
+R6
+n@inverter@c@u
+vlsm_manager
+Z13 !s110 1498573717
+!i10b 1
+!s100 7e<;NnV42L2o`8NQbZ3m@2
+ING?_LO8CzJ[>MN<mA@Xk20
+R1
+R2
+Z14 w1497201715
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v
+L0 1
+R4
+r1
+!s85 0
+31
+Z15 !s108 1498573717.000000
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager.v|
+!s101 -O0
+!i113 1
+R6
+vlsm_manager_c
+R13
+!i10b 1
+!s100 m17n84g4Yz^2I^^U4a?gJ0
+IA?o9k<;Q@CGi=IUMTE??92
+R1
+R2
+R14
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v
+L0 1
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_c.v|
+!s101 -O0
+!i113 1
+R6
+vlsm_manager_s
+R13
+!i10b 1
+!s100 ZIcoHDVP@FX[IdVN@E2CE2
+IBbS5o?=8WmS5=?52PSX_[1
+R1
+R2
+R14
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v
+L0 1
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/lsm_manager_s.v|
+!s101 -O0
+!i113 1
+R6
+vMCU_TESTER
+R13
+!i10b 1
+!s100 cjPPjHcASkZI:Z0P0gXXJ0
+I2_A?GjOX;Gie<eIeK9AVO0
+R1
+R2
+R7
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v
+L0 1
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/MCU_TESTER.v|
+!s101 -O0
+!i113 1
+R6
+n@m@c@u_@t@e@s@t@e@r
+vmux_16x1_32bit
+Z16 !s110 1498573719
+!i10b 1
+!s100 hWA0^VHfa6B>nPc<^<;[V3
+I=nb]:6jJ_V@@7?V;;ML8O2
+R1
+R2
+Z17 w1497208748
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v
+L0 1
+R4
+r1
+!s85 0
+31
+Z18 !s108 1498573719.000000
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_16x1_32bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_2x1_1bit
+R13
+!i10b 1
+!s100 >UCf5S6^@`W<nYnCObI`f1
+IRK[0ZD;CGK;MZg]8;PzZ:0
+R1
+R2
+w1497855592
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v
+L0 8
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_1bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_2x1_32bit
+Z19 !s110 1498573718
+!i10b 1
+!s100 @0_HWZIi7hiB9?[P>1XU]2
+I;QFUf<JPFB@@0VGOKZ8Td3
+R1
+R2
+Z20 w1497210830
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+Z21 !s108 1498573718.000000
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_32bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_2x1_3bit
+R13
+!i10b 1
+!s100 i39C<CkeMRKm3j[:K]?_^0
+IAf=Ec0Y=YY0:UUjB8nX`92
+R1
+R2
+R20
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v
+L0 8
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_3bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_2x1_5bit
+R13
+!i10b 1
+!s100 h=OzR=A008jnz4^4jU;:P0
+IM0]][DnTI0`74_1X^W@a53
+R1
+R2
+R20
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v
+L0 8
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_5bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_2x1_8bit
+R13
+!i10b 1
+!s100 =I5kDGcVUTHNDld6C^:;z0
+Ij@j>eMjLL3ZZdOKkG@ASM2
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v
+L0 8
+R4
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_2x1_8bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_4x1_1bit
+R19
+!i10b 1
+!s100 N`K[a;W>7?m3V?0M:lfgW2
+IW3J_hA@9el_9_Z5`m4MeK2
+R1
+R2
+R20
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_1bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_4x1_4bit
+R19
+!i10b 1
+!s100 :Xf5ZWlj5DO0DAAb`N5cj0
+IJoEi61h7oCnXcRgc3KB:>0
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_4bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_4x1_5bit
+R19
+!i10b 1
+!s100 O=:]Po[?D1E0SM6zFVedC2
+I`mBn1TNgCbebcMDX^7PXb2
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_5bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_4x1_8bit
+R19
+!i10b 1
+!s100 :ZQ5L=1Uo>VIUU3>jCH832
+IlSnGP7IK15L:2R8]aPi0i0
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_4x1_8bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_8x1_1bit
+R19
+!i10b 1
+!s100 71Q?I?a?14881RJkTJaPU2
+I:FQ5C6I30O[I2ZPa1B:EX2
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_1bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_8x1_32bit
+R16
+!i10b 1
+!s100 ShL[8jO:gGNHk^GYI7YM33
+I]5gQIf>O7D1Gk9bKBKaXk1
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v
+L0 2
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_32bit.v|
+!s101 -O0
+!i113 1
+R6
+vmux_8x1_4bit
+R19
+!i10b 1
+!s100 [f`T3PX2DTJE002NBe^bk1
+IF[WHHe[78iCEkOXD2S=hB3
+R1
+R2
+R17
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v
+L0 3
+R4
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/mux_8x1_4bit.v|
+!s101 -O0
+!i113 1
+R6
+vNextStateAdd
+R16
+!i10b 1
+!s100 We`8ES`ji>@AWo8IjUM]`3
+I?7l]YamM1TQ9HGZb<`^dU1
+R1
+R2
+R9
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v
+L0 1
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/NextStateAdd.v|
+!s101 -O0
+!i113 1
+R6
+n@next@state@add
+vram256x8
+R16
+!i10b 1
+!s100 ff7o>54@;imfR0zT1f4]@0
+In;3G8_mo8BjOJWQ@bCnI;0
+R1
+R2
+R12
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v
+L0 1
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8.v|
+!s101 -O0
+!i113 1
+R6
+vram256x8_cREC
+R16
+!i10b 1
+!s100 nGZJaHPKgNb3_[n^QCl>N2
+I<^YY<f`nIUinH[EkLzNzk3
+R1
+R2
+w1498338700
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v
+L0 1
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_cREC.v|
+!s101 -O0
+!i113 1
+R6
+nram256x8_c@r@e@c
+vram256x8_s
+R16
+!i10b 1
+!s100 ZR;cVG<YT<Tn>^T_mS4UH1
+I1RgGln6Jl5<eY3`1L3W3f2
+R1
+R2
+R12
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v
+L0 1
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/ram256x8_s.v|
+!s101 -O0
+!i113 1
+R6
+vReg32bits
+R16
+!i10b 1
+!s100 fWjJK@fizZI8ci=:DiPDB3
+I_nGJXYZREU]>oiTREMbQ>2
+R1
+R2
+R12
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v
+L0 1
+R4
+r1
+!s85 0
+31
+R18
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Reg32bits.v|
+!s101 -O0
+!i113 1
+R6
+n@reg32bits
+vRegister_32bits_pepo
+Z22 !s110 1498573720
+!i10b 1
+!s100 <QQ[o_Q:>HYU?NPzz3HmR3
+IBD=a[6MiH]DXKco8^kaD61
+R1
+R2
+R7
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+Z23 !s108 1498573720.000000
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/Register_32bits_pepo.v|
+!s101 -O0
+!i113 1
+R6
+n@register_32bits_pepo
+vRegisterFile_pepo
+R22
+!i10b 1
+!s100 VX^^K@`9a6hG02P[mZj991
+IG[Fk]MnKcCXSY?NJOXKzB3
+R1
+R2
+R8
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v
+L0 1
+R4
+r1
+!s85 0
+31
+R23
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/RegisterFile_pepo.v|
+!s101 -O0
+!i113 1
+R6
+n@register@file_pepo
+vrom
+R22
+!i10b 1
+!s100 Q]PT`B<l67bJaIJDBNj]W3
+Ih0o_?6e0`I8YNm_gzW3F10
+R1
+R2
+R7
+8C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\rom_64bits.v
+FC:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\rom_64bits.v
+L0 3
+R4
+r1
+!s85 0
+31
+R23
+!s107 C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\rom_64bits.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\rom_64bits.v|
+!s101 -O0
+!i113 1
+R6
+vshifter
+!s110 1498574876
+!i10b 1
+!s100 IoXfJgFd>EcBD>Po^aMSM0
+I4_SHTD7QRhcTN;iE7hIWD0
+R1
+R2
+w1498574861
+8C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\shifter.v
+FC:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\shifter.v
+L0 1
+R4
+r1
+!s85 0
+31
+!s108 1498574876.000000
+!s107 C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\shifter.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Pepo\Documents\ARM_Architecture_V2\ARM_Architecture_V2\shifter.v|
+!s101 -O0
+!i113 1
+R6
+vSLSManager
+R0
+!i10b 1
+!s100 <]dldWF8SaU`Q>YN2>h2`0
+IDIV?PGHnCTfO8GX;g8zhP1
+R1
+R2
+w1498364018
+8C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v
+FC:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v
+L0 9
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Pepo/Documents/ARM_Architecture_V2/ARM_Architecture_V2/SLSManager.v|
+!s101 -O0
+!i113 1
+R6
+n@s@l@s@manager
