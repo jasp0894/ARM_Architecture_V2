@@ -19,9 +19,10 @@ module Shifter_Tester;
 			//IR = 32'b11100101010101100101000000010100; // Addresing Mode 2 (zero extention)
 			//IR = 32'b11100001111001100101101111011110;	//Addresing mode 3 (one extention)
 			//IR = 32'b11101000101100110001011110000010;	//Load/Store Multiple
-			IR <= 32'b11100000100110100001000000101100;		//State 10
-			
-			RM <= 32'd35;
+			//IR <= 32'b11100000100110100001000000101100;		//State 10
+			  IR <= 32'b00011010111111111111111111111101;
+
+			RM <= 32'd0;
 			CIN <= 1'b0;
 			ENABLE <= 1'b1;
 
