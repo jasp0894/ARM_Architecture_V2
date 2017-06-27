@@ -43,14 +43,14 @@ module MCU_TESTER;
 
 	initial
 		begin
-			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \tPC"); 
+			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1         R2       R3       R5"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %h %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d",
 					cu_datapath,
 					cu.CTL_REG_CUI[29:24], 
 					cu.CTL_REG_CUI[15:8], 
@@ -79,7 +79,12 @@ module MCU_TESTER;
 					datapath.MI_OUT,
 					datapath.MDR_OUT,
 					datapath.MAR_OUT,
-					datapath.RF.QS15); 
+					datapath.RF.QS15,
+					datapath.RF.QS0,
+					datapath.RF.QS1,
+					datapath.RF.QS2,
+					datapath.RF.QS3,
+					datapath.RF.QS5); 
 		end
 
 

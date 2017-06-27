@@ -1,6 +1,6 @@
 module shifter (output reg[31:0] SHIFTER_OPERAND, output reg COUT, input [31:0] RM,IR, input CIN,ENABLE);
 
-	reg[31:0] RegTemp;	// Registro Temporero para "32-bit immediate shifter operand"
+	reg[63:0] RegTemp;	// Registro Temporero para "32-bit immediate shifter operand"
 	reg[15:0] MultipleReg;	// Registro temporero para Load/Store Multiple
 	
 	// Tipos de "SHIFTS" en "Shift by immediate shifter operand"
@@ -121,7 +121,7 @@ module shifter (output reg[31:0] SHIFTER_OPERAND, output reg COUT, input [31:0] 
 				else
 					RegTemp = {8'h00,IR[23:0]};
 
-				SHIFTER_OPERAND = 32'd4 + 32'd4*RegTemp;	
+				SHIFTER_OPERAND = 32'd4*RegTemp;	
 			end	
 
 		end
