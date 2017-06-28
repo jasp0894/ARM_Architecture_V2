@@ -30,7 +30,7 @@ module MCU_TESTER;
 		begin
 			 //Memory Pre-Charge
 				
-			fi = $fopen("ramdata.txt", "r");				//Open the input file.
+			fi = $fopen("ramdata2.txt", "r");				//Open the input file.
 			Address = 32'd0;								//Set the initial Address in memory to begin pre-charge.
 			while (!$feof(fi)) 
 				begin					//Keep the file open until you reach its end.
