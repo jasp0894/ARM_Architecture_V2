@@ -1,4 +1,4 @@
-module CondTester (output reg OUT, input [3:0] COND, input Z,C,N,V);
+module CondTester (output reg OUT, input [3:0] COND, input C,Z,V,N);
 
     
 	always @ (COND,Z,C,N,V)
