@@ -40,17 +40,17 @@ module ALU_V1 (output reg [31:0] R, output reg [3:0] FLAG, /*output reg CF, ZF, 
 
 
 	//Flags initialization
-	initial begin
-		FLAG[3] = 1'b0;			//Carry Flag
-		FLAG[2] = 1'b0;			//Zero Flag
-		FLAG[1] = 1'b0;			//Overflow Flag
-		FLAG[0] = 1'b0;			//Negative Flag
-	end
+	// initial begin
+	// 	FLAG[3] = 1'b0;			//Carry Flag
+	// 	FLAG[2] = 1'b0;			//Zero Flag
+	// 	FLAG[1] = 1'b0;			//Overflow Flag
+	// 	FLAG[0] = 1'b0;			//Negative Flag
+	// end
 
 //Temporal Variables
 reg [31:0] tempResult;
 
-	always@(A,B,OP)		
+	always@(A,B,OP,CIN)		
 	//Input operation different cases evaluation
 	case(OP)
 		AND: 
@@ -96,8 +96,11 @@ reg [31:0] tempResult;
 	//--------------------------Arithmetic Instructions------------------------------
 		SUB:
 			begin
-				{FLAG[3],R} = B - A;		//BorrowFlag = not(CarryFlag)
-				FLAG[3] = ~FLAG[3];
+				R = B - A;		//BorrowFlag = not(CarryFlag)
+				if(B < A)
+					FLAG[3] = 1'b1;
+				else
+					FLAG[3] = 1'b0;
 				if(A[31] != B[31] && R[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -115,8 +118,12 @@ reg [31:0] tempResult;
 
 		SBC:
 			begin
-				 {FLAG[3],R} = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 FLAG[3] = ~FLAG[3];
+				 R = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 
+				 if(B <= A)
+					FLAG[3] = 1'b1;
+				else
+					FLAG[3] = 1'b0;
 				if(A[31] != B[31] && R[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -135,8 +142,11 @@ reg [31:0] tempResult;
 		RSB:
 			begin
 			
-				 {FLAG[3],R} = A - B;		//BorrowFlag = not(CarryFlag)
-				 FLAG[3] = ~FLAG[3];
+				 R = A - B;		//BorrowFlag = not(CarryFlag)
+				 if(A < B)
+					FLAG[3] = 1'b1;
+				else
+					FLAG[3] = 1'b0;
 				if(A[31] != B[31] && R[31] == B[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -154,8 +164,12 @@ reg [31:0] tempResult;
 
 		RSC:
 			begin
-				 {FLAG[3],R} = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 FLAG[3] = ~FLAG[3];
+				 R = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 if(A <= B)
+					FLAG[3] = 1'b1;
+				else
+					FLAG[3] = 1'b0;
+
 				if(A[31] != B[31] && R[31] == B[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -257,8 +271,12 @@ reg [31:0] tempResult;
 		CMP:
 			begin
 				tempResult = 32'd0;		//Dummy variable to test flags
-				{FLAG[3],tempResult} = B - A;		//BorrowFlag = not(CarryFlag)
-				FLAG[3] = ~FLAG[3];
+				tempResult = B - A;		//BorrowFlag = not(CarryFlag)
+				
+				if(B < A)
+					FLAG[3] = 1'b1;
+				else
+					FLAG[3] = 1'b0;
 
 				if(A[31] != B[31] && tempResult[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
@@ -275,7 +293,7 @@ reg [31:0] tempResult;
 				FLAG[0] = tempResult[31];		//FLAG[0] takes the value of R's MSbit	
 			end
 
-		CMP:
+		CMN:
 			begin
 				tempResult = 32'd0;		//Dummy variable to test flags
 				 {FLAG[3],tempResult} = B + A;		//BorrowFlag = not(CarryFlag)
