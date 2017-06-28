@@ -10,20 +10,20 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 
 	// Data Processing 
 
-	else if(IR[27:25] == 3'b000 && IR[4]==0)								
-	begin
-		if(IR[24]==1'b1 && IR[23]==1'b0)
-			OUT = 8'd14;
-		else 
-			OUT = 8'd10;
-	end					
+	else if(IR[27:25] == 3'b000 && IR[4]==0)			// Shift by Immediate					
+	//begin
+		//if(IR[24]==1'b1 && IR[23]==1'b0)
+			//OUT = 8'd14;
+		//else 
+		OUT = 8'd10;
+	//end					
 
-	else if(IR[27:25] == 3'b001)begin				 
-		if(IR[24]==1'b1 && IR[23]==1'b0)
-			OUT = 8'd15;
-		else 
-			OUT = 8'd11;	
-	end	
+	else if(IR[27:25] == 3'b001)//begin		// 32-bit Immediate Shifter		 
+	//	if(IR[24]==1'b1 && IR[23]==1'b0)
+		//	OUT = 8'd15;
+		//else 
+		OUT = 8'd11;	
+	//end	
 
 	// Addresing Mode 2 
 
