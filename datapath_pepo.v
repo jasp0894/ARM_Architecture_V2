@@ -68,7 +68,7 @@ module datapath_pepo (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC,
 		RegisterFile_pepo RF (PA, PB, ALU_OUT, CLK, MK_OUT, MA_OUT, IR_OUT[3:0], MC_OUT, RESET);
 		lsm_manager lsm_manager (cu_datapath[6], cu_datapath[5:3], IR_OUT, CLK, LSM_DETECT, LSM_END, LSM_COUNTER);
 		SLSManager SLSManager (SLS_OUT,IR_OUT,cu_datapath[10]);
-		shifter shifter (SHIFTER_OUT, FLAGS[3], PB, IR_OUT, FR_OUT[3], 1'b1 /*Wierd*/);	//Most ackard wiring.
+		shifter shifter (SHIFTER_OUT,PB, IR_OUT,1'b1 /*Wierd*/);	//Most ackard wiring.
 		CondTester ConditionTester (CONDTESTER_OUT, IR_OUT[31:28], FR_OUT[3], FR_OUT[2], FR_OUT[1], FR_OUT[0]);
 
 endmodule // datapath_pepo

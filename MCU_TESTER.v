@@ -14,9 +14,14 @@ module MCU_TESTER;
 	wire [34:0] cu_datapath;
 
 	//Simulation Controls
-	integer fi,code;
+	integer fi,fo,code;
 	reg[31:0] Address;
 	reg [31:0] data;			//Dummy variable used to pre-charge RAM.
+	reg MOV;						//Indicates memory that an operation will be performed.
+	reg ReadWrite;
+	reg [2:0] MS_2_0;			//Allows selection of the data size and indicates if the data is signed?
+	
+	
 
 	//Call Modules
 	cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
@@ -41,16 +46,33 @@ module MCU_TESTER;
 			$fclose(fi);									//Close the input file.															//Pre-charge ends
 		end
 
+
+		//Interact with memory
+		initial
+			begin
+				fo = $fopen("ramoutput.txt", "w");	//Open memory output file
+			end
+
+		always @(MOC)
+			begin
+				if(MOC)
+					if(~cu_datapath[28])							//If the RAM signals it completed the current operation and the operation was read,
+						$fdisplay(fo,"Contents of memory location %d are %b",datapath.ram256x8.Address,datapath.ram256x8.DataIn);		//Place the bits in the output bus of the RAM in a file.
+					//Note that you must read from memory in order to write in the ouput file.
+			end	
+
+	
+
 	initial
 		begin
-			$display("        \t CU\t   	STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1         R2       R3       R5"); 
+			$display("  \t CU\t   	     STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1         R2          R3       R5       R4       R10"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d %d %d",
 					cu_datapath,
 					cu.CTL_REG_CUI[29:24], 
 					cu.CTL_REG_CUI[15:8], 
@@ -84,7 +106,9 @@ module MCU_TESTER;
 					datapath.RF.QS1,
 					datapath.RF.QS2,
 					datapath.RF.QS3,
-					datapath.RF.QS5); 
+					datapath.RF.QS5,
+					datapath.RF.QS4,
+					datapath.RF.QS10); 
 		end
 
 

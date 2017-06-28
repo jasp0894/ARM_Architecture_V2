@@ -96,11 +96,8 @@ reg [31:0] tempResult;
 	//--------------------------Arithmetic Instructions------------------------------
 		SUB:
 			begin
-				R = B - A;		//BorrowFlag = not(CarryFlag)
-				if(B < A)
-					FLAG[3] = 1'b1;
-				else
-					FLAG[3] = 1'b0;
+				{FLAG[3],R} = B - A;		//BorrowFlag = not(CarryFlag)
+				FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -118,12 +115,8 @@ reg [31:0] tempResult;
 
 		SBC:
 			begin
-				 R = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 
-				 if(B <= A)
-					FLAG[3] = 1'b1;
-				else
-					FLAG[3] = 1'b0;
+				 {FLAG[3],R} = B - A - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -142,11 +135,8 @@ reg [31:0] tempResult;
 		RSB:
 			begin
 			
-				 R = A - B;		//BorrowFlag = not(CarryFlag)
-				 if(A < B)
-					FLAG[3] = 1'b1;
-				else
-					FLAG[3] = 1'b0;
+				 {FLAG[3],R} = A - B;		//BorrowFlag = not(CarryFlag)
+				 FLAG[3] = ~FLAG[3];
 				if(A[31] != B[31] && R[31] == B[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
 									//opposite sign and the result is the same sign of the 
@@ -164,11 +154,8 @@ reg [31:0] tempResult;
 
 		RSC:
 			begin
-				 R = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
-				 if(A <= B)
-					FLAG[3] = 1'b1;
-				else
-					FLAG[3] = 1'b0;
+				 {FLAG[3],R} = A - B - (1-CIN);		//BorrowFlag = not(CarryFlag). The operation includes the input carry
+				 FLAG[3] = ~FLAG[3];
 
 				if(A[31] != B[31] && R[31] == B[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
@@ -271,12 +258,8 @@ reg [31:0] tempResult;
 		CMP:
 			begin
 				tempResult = 32'd0;		//Dummy variable to test flags
-				tempResult = B - A;		//BorrowFlag = not(CarryFlag)
-				
-				if(B < A)
-					FLAG[3] = 1'b1;
-				else
-					FLAG[3] = 1'b0;
+				{FLAG[3],tempResult} = B - A;		//BorrowFlag = not(CarryFlag)
+				FLAG[3] = ~FLAG[3];
 
 				if(A[31] != B[31] && tempResult[31] == A[31])
 					FLAG[1] = 1'b1;		//Overflow only occurs when subtracting two numbers of 
