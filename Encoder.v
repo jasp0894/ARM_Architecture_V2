@@ -9,21 +9,21 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 	
 
 	// Data Processing 
-
 	else if(IR[27:25] == 3'b000 && IR[4]==0)			// Shift by Immediate					
-	//begin
-		//if(IR[24]==1'b1 && IR[23]==1'b0)
-			//OUT = 8'd14;
-		//else 
-		OUT = 8'd10;
-	//end					
+	begin
+		if(IR[24]==1'b1 && IR[23]==1'b0)
+			OUT = 8'd14;
+		else 
+			OUT = 8'd10;
+	end					
 
-	else if(IR[27:25] == 3'b001)//begin		// 32-bit Immediate Shifter		 
-	//	if(IR[24]==1'b1 && IR[23]==1'b0)
-		//	OUT = 8'd15;
-		//else 
-		OUT = 8'd11;	
-	//end	
+	else if(IR[27:25] == 3'b001)
+	begin		// 32-bit Immediate Shifter		 
+		if(IR[24]==1'b1 && IR[23]==1'b0)
+			OUT = 8'd15;
+		else 
+			OUT = 8'd11;	
+	end	
 
 	// Addresing Mode 2 
 
@@ -33,12 +33,12 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 		begin					
 
 			if(IR[24] == 1'b0)	//post-indexed
-				OUT= 8'd17;					
+				OUT= 8'd19;					
 			else if (IR[21] == 0)	// immediate offset
 				OUT = 8'd16;
 
 			else	//pre-indexed
-				OUT = 8'd19;		
+				OUT = 8'd17;		
 		end	
 
 		// Register
@@ -47,11 +47,11 @@ module Encoder (output reg[7:0] OUT, input[31:0] IR);
 		begin					
 
 			if(IR[24] == 1'b0)	//post-indexed
-				OUT= 8'd22;					
+				OUT= 8'd23;					
 			else if (IR[21] == 0)	// register offset
 				OUT = 8'd21;
 			else	//pre-indexed
-				OUT = 8'd23;		
+				OUT = 8'd22;		
 		end	
 
 	// Addresing Mode 3 (Cannot be inside Addr.Mode 2 due to IR22 having different meaning)
