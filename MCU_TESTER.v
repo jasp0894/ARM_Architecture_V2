@@ -27,7 +27,7 @@ module MCU_TESTER;
 	cu_pepo cu (IR_OUT, MOC, COND, LSM_DETECT,LSM_END, RESET, CLK, cu_datapath);
 	datapath_pepo datapath (cu_datapath, CLK, RESET, IR_OUT, LSM_DETECT, LSM_END, MOC, COND);
 
-	parameter sim_time = 1000;
+	parameter sim_time = 1500;
 
 
 	initial
@@ -65,14 +65,14 @@ module MCU_TESTER;
 
 	initial
 		begin
-			$display("  \t CU\t   	     STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1         R2          R3       R5       R4       R10"); 
+			$display("  \t CU\t   	     STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1          R5           R10      R12       R14"); 
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d %d %d",
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d  %d %d %d %d %d %d %d",
 					cu_datapath,
 					cu.CTL_REG_CUI[29:24], 
 					cu.CTL_REG_CUI[15:8], 
@@ -104,11 +104,10 @@ module MCU_TESTER;
 					datapath.RF.QS15,
 					datapath.RF.QS0,
 					datapath.RF.QS1,
-					datapath.RF.QS2,
-					datapath.RF.QS3,
 					datapath.RF.QS5,
-					datapath.RF.QS4,
-					datapath.RF.QS10); 
+					datapath.RF.QS10,
+					datapath.RF.QS12,
+					datapath.RF.QS14); 
 		end
 
 
@@ -123,7 +122,7 @@ module MCU_TESTER;
 	initial 
 	begin
 		CLK = 1'b0;
-		repeat (1000)
+		repeat (1500)
 		#2 CLK = ~CLK;
 	end
 

@@ -37,7 +37,9 @@ module MCU_TESTER_acc;
 		begin
 			 //Memory Pre-Charge
 				
-			fi = $fopen("ramdata.txt", "r");				//Open the input file.
+
+      fi = $fopen("ramdata2.txt", "r");				//Open the input file.
+
 			Address = 32'd0;								//Set the initial Address in memory to begin pre-charge.
 			while (!$feof(fi)) 
 				begin					//Keep the file open until you reach its end.
@@ -55,14 +57,18 @@ module MCU_TESTER_acc;
 
 	initial
 		begin
-			$display("  \t CU\t   	     STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1         R2          R3       R5       R4       R10"); 
+
+			$display("  \t CU\t   	     STATE#	CR15-CR8 CR7-CR0   R/W  MEM_IN  MEM_OUT  CondT  IR_OUT   Rd Rn  SHIFTER   \tPA \t   PB  FR_Q     ALU_OUT   CZVN MA\t     MB MC   MD        ME MF MG MH MI  MDR 	  MAR      \t PC           R0        R1          R3       R5          R10       R12 "); 
+
 		end
 
 	always@(posedge CLK)
 
 		begin
 
-			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d %d %d",
+
+			$monitor("%b  %d   %d   %d         %b   %h %h   %b   %h %d %d %d %d %d   %b %d   %b %d  %d %d   %d %d %d %d %d  %d  %h %d %d%d %d  %d %d %d     %d   ",
+
 					cu_datapath,
 					cu.CTL_REG_CUI[29:24], 
 					cu.CTL_REG_CUI[15:8], 
@@ -94,11 +100,11 @@ module MCU_TESTER_acc;
 					datapath.RF.QS15,
 					datapath.RF.QS0,
 					datapath.RF.QS1,
-					datapath.RF.QS2,
 					datapath.RF.QS3,
 					datapath.RF.QS5,
-					datapath.RF.QS4,
-					datapath.RF.QS10); 
+					datapath.RF.QS10,
+					datapath.RF.QS12,); 
+
 		end
 
 
